@@ -1,0 +1,2265 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sistema Gerador de Prontuários NR-13 | Escale sua Engenharia</title>
+    <!-- Fontes Premium SaaS: Outfit para Títulos e Inter para Textos -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Outfit:wght@400;600;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-blue: #0066a1;
+            --dark-blue: #001a31;
+            --menu-blue: #225a8a;
+            --light-blue: #e6f3fb;
+            --text-dark: #1e293b;
+            --text-gray: #64748b;
+            --bg-light: #f8fafc;
+            --bg-gray-card: #f1f5f9;
+            --accent-color: #009cf3;
+            --cta-color: #ffb700;
+            --cta-hover: #f5a600;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif; /* Fonte de corpo super legível */
+            color: var(--text-dark);
+            background-color: #ffffff;
+            overflow-x: hidden;
+            line-height: 1.6;
+        }
+
+        h1, h2, h3, h4, .logo {
+            font-family: 'Outfit', sans-serif; /* Fonte tech e moderna para títulos */
+        }
+
+
+
+
+
+
+
+
+
+
+
+        /* --- HEADER --- */
+        header {
+            background-color: var(--dark-blue);
+            color: #ffffff;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            height: 90px;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            border-bottom: 1px solid rgba(255,255,255,0.05);
+        }
+
+        .header-left {
+            display: flex;
+            align-items: center;
+            height: 100%;
+            padding-left: 5%;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 32px;
+            font-weight: 900;
+            color: #ffffff;
+            letter-spacing: -0.5px;
+        }
+
+        .logo i {
+            color: #10b981; /* Verde esmeralda premium */
+        }
+
+        .logo span {
+            font-family: 'Inter', sans-serif;
+            font-size: 11px;
+            font-weight: 700;
+            display: block;
+            margin-top: -10px;
+            letter-spacing: 3px;
+            background-color: orange;
+            color: #ffffff;
+            padding: 0 3px;
+        }
+
+        .header-contacts {
+            display: flex;
+            align-items: center;
+            gap: 30px;
+            font-size: 14px;
+            font-weight: 500;
+            color: #cbd5e1;
+        }
+
+        .header-contacts div {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .header-contacts i {
+            font-size: 16px;
+            color: var(--accent-color);
+        }
+
+        .header-right {
+            display: flex;
+            align-items: center;
+            height: 100%;
+        }
+
+        .client-area-btn {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 30px;
+            padding: 10px 24px;
+            color: #ffffff;
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: 600;
+            margin-right: 30px;
+            transition: all 0.3s ease;
+        }
+
+        .client-area-btn:hover {
+            background-color: rgba(255, 255, 255, 0.1);
+            border-color: #ffffff;
+        }
+
+        .menu-btn {
+            background-color: var(--menu-blue);
+            height: 100%;
+            width: 90px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            gap: 6px;
+            cursor: pointer;
+            border-left: 1px solid rgba(255,255,255,0.05);
+            transition: background 0.3s;
+        }
+
+        .menu-btn:hover {
+            background-color: var(--primary-blue);
+        }
+
+        .menu-btn span {
+            display: block;
+            width: 30px;
+            height: 2px;
+            background-color: #ffffff;
+            border-radius: 2px;
+        }
+
+        /* --- SEÇÕES GERAIS --- */
+        .section-title {
+            text-align: center;
+            font-size: 30px;
+            color: rgb(0, 0, 0);
+            margin-bottom: 0px;
+            font-weight: 700;
+            letter-spacing: -1px;
+        }
+
+        .section-subtitle {
+            text-align: center;
+            color: #ababab;
+            margin-bottom: 70px;
+            font-size: 18px;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+
+
+
+
+
+
+
+
+        /* --- HERO CSS --- */
+    
+        .hero-section {
+            /* Define o arquivo de imagem que será usado como fundo */
+            background-image: url('fundo1.PNG'); 
+            
+            /* Força a imagem a preencher toda a largura e altura da seção sem achatar ou distorcer */
+            background-size: cover; 
+            
+            /* Ajuste fino da posição: 'center' centraliza na horizontal. 
+               O '15%' (antes estava 25%) mexe na vertical. Quanto menor o número, mais a imagem "desce". 
+               Se precisar descer ainda mais, teste 10%. Se desceu muito, teste 20%. */
+            background-position: center 25%; 
+            
+            /* Garante que a imagem não vire um mosaico se repetindo várias vezes */
+            background-repeat: no-repeat; 
+            
+            /* Espaçamento interno: 100px de teto, 5% nas laterais, 120px de chão */
+            padding: 100px 5% 120px; 
+            
+            /* Ativa o Flexbox, um sistema inteligente para organizar os itens dentro da seção */
+            display: flex; 
+            
+            /* Empurra todo o conteúdo interno (textos e botão) para a esquerda */
+            justify-content: flex-start; 
+            
+            /* Alinha os textos e o botão perfeitamente no centro vertical da seção */
+            align-items: center; 
+            
+            /* Transforma esta seção na "âncora" para o filtro de degradê escuro (::before) não vazar para fora */
+            position: relative; 
+        }
+
+        /* Degradê para garantir a leitura do texto sobre a imagem */
+        .hero-section::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: linear-gradient(to right, rgba(0, 26, 49, 0.95) 0%, rgba(0, 26, 49, 0.7) 40%, rgba(0, 26, 49, 0.1) 100%);
+            z-index: 1;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2; /* Mantém o texto acima do degradê */
+            max-width: 650px; /* Limita a largura para ficar só na esquerda */
+            text-align: left; /* Alinha os textos à esquerda */
+        }
+
+        .hero-title {
+            font-size: 40px;
+            font-weight: 900;
+            color: #ffffff;
+            line-height: 1.1;
+            margin-bottom: 25px;
+            letter-spacing: -1px;
+        }
+
+        .hero-text {
+            font-family: 'Inter', sans-serif;
+            font-size: 16px;
+            color: #cbd5e1;
+            margin-bottom: 40px;
+            line-height: 1.6;
+        }
+
+        .btn-hero {
+            display: inline-block;
+            background-color: var(--cta-color);
+            color: #000;
+            font-family: 'Outfit', sans-serif;
+            font-size: 14px;
+            font-weight: 800;
+            text-decoration: none;
+            padding: 10px 20px;
+            border-radius: 4px; /* Raio do botão alterado para 4px */
+            text-transform: uppercase;
+            box-shadow: 0 10px 25px rgba(255, 183, 0, 0.3);
+            transition: all 0.3s ease;
+            margin-bottom: 15px;
+        }
+
+        .btn-hero:hover {
+            background-color: var(--cta-hover);
+            transform: translateY(-3px);
+            box-shadow: 0 15px 35px rgba(255, 183, 0, 0.4);
+        }
+
+        .hero-trust {
+            display: block;
+            font-family: 'Inter', sans-serif;
+            font-size: 14px;
+            color: #94a3b8;
+            font-style: italic;
+        }
+
+        /* --- CHECKLIST E NORMAS (NOVA SESSÃO) --- */
+        /* --- CHECKLIST E NORMAS (NOVA SESSÃO) --- */
+        /* --- CHECKLIST E NORMAS (NOVA SESSÃO) --- */
+        .system-compliance-section {
+            background-color: var(--bg-light);
+            border-radius: 16px;
+            padding: 20px 50px;
+            
+            /* --- O AJUSTE PARA O CARD FLUTUANTE --- */
+            max-width: 1200px; /* Limita a largura para não virar um paredão */
+            width: 90%; /* Mantém um respiro lateral em telas menores */
+            margin: -50px auto 60px auto; /* -30px sobe, 'auto' centraliza, 60px empurra a sessão de baixo */
+            position: relative; 
+            z-index: 10; 
+            /* -------------------------------------- */
+
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 40px;
+            border: 1px solid #e2e8f0;
+            box-shadow: 0 15px 40px rgba(0, 26, 49, 0.08); /* Sombra um pouco mais forte para dar efeito de profundidade */
+        }
+
+        .compliance-checklist h3 {
+            font-family: 'Outfit', sans-serif;
+            font-size: 20px;
+            color: var(--dark-blue);
+            margin-bottom: 25px;
+            font-weight: 800;
+        }
+
+        .compliance-checklist ul {
+            list-style: none;
+            display: grid;
+            grid-template-columns: 1fr 1fr; /* Divide a lista em 2 colunas */
+            gap: 15px 30px;
+        }
+
+        .compliance-checklist li {
+            font-family: 'Inter', sans-serif;
+            font-size: 14px;
+            color: var(--text-dark);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-weight: 500;
+        }
+
+        .compliance-checklist li i {
+            color: #10b981; /* Verde esmeralda nos ícones */
+            font-size: 18px;
+        }
+
+        .compliance-badge {
+            background: #ffffff;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 10px 25px rgba(0, 26, 49, 0.08);
+            text-align: center;
+            max-width: 320px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            border: 1px solid #e2e8f0;
+        }
+
+        .asme-img {
+            max-width: 130px;
+            height: auto;
+            margin-bottom: 15px;
+        }
+
+        .compliance-badge p {
+            font-family: 'Inter', sans-serif;
+            font-size: 14px;
+            color: var(--text-gray);
+            line-height: 1.6;
+            margin: 0;
+        }
+
+        /* Responsividade Extra */
+        @media (max-width: 992px) {
+            .hero-section::before {
+                /* Escurece a tela toda no celular para garantir leitura */
+                background: linear-gradient(to right, rgba(0, 26, 49, 0.9) 0%, rgba(0, 26, 49, 0.8) 100%);
+            }
+            .system-compliance-section {
+                flex-direction: column;
+                text-align: center;
+                padding: 30px 20px;
+            }
+            .compliance-checklist ul {
+                grid-template-columns: 1fr; /* Volta para 1 coluna no celular */
+                text-align: left;
+                display: inline-grid;
+                margin-bottom: 30px;
+            }
+        }
+
+
+
+
+
+        /* --- COMO FUNCIONA (Telas do Sistema) --- */
+        .how-it-works-section {
+            padding: 10px 5%;
+            background-color: #ffffff; /* Fundo branco para contrastar com a seção cinza claro de cima */
+        }
+
+        .feature-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            flex-direction: column;
+            gap: 0px; /* Espaço generoso entre os blocos para respiro */
+        }
+
+        .feature-row {
+            display: flex;
+            align-items: center;
+            gap: 60px;
+        }
+
+        .feature-row.reverse {
+            flex-direction: row-reverse;
+        }
+
+        .feature-text {
+            flex: 1;
+        }
+
+        .feature-text h3 {
+            font-family: 'Outfit', sans-serif;
+            font-size: 25px;
+            color: var(--dark-blue);
+            margin-bottom: 10px;
+            font-weight: 800;
+            line-height: 1.2;
+        }
+
+        .feature-text p {
+            font-family: 'Inter', sans-serif;
+            font-size: 16px;
+            color: var(--text-gray);
+            margin-bottom: 10px;
+            line-height: 1.7;
+        }
+
+        .feature-text ul {
+            list-style: none;
+        }
+
+        .feature-text ul li {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin-bottom: 10px;
+            font-family: 'Inter', sans-serif;
+            font-size: 15px;
+            color: var(--text-dark);
+            font-weight: 500;
+        }
+
+        .feature-text ul li i {
+            color: var(--accent-color);
+            font-size: 18px;
+        }
+
+        .feature-image {
+            flex: 1;
+            position: relative;
+        }
+
+        .feature-image img {
+            width: 100%;
+            height: auto;
+            border-radius: 16px;
+            box-shadow: 0 25px 50px rgba(0, 26, 49, 0.08); /* Sombra elegante SaaS */
+            border: 1px solid #e2e8f0;
+            transition: transform 0.4s ease, box-shadow 0.4s ease;
+        }
+
+        .feature-image img:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 35px 60px rgba(0, 26, 49, 0.12);
+        }
+
+        /* --- RESPONSIVIDADE COMO FUNCIONA --- */
+        @media (max-width: 992px) {
+            .feature-row, .feature-row.reverse {
+                flex-direction: column;
+                gap: 40px;
+                text-align: center;
+            }
+            .feature-text ul li {
+                justify-content: center;
+                text-align: left;
+            }
+            .feature-container {
+                gap: 80px;
+            }
+        }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+        
+
+
+
+        /* --- NOVA SEÇÃO: GRADE DE RELATÓRIOS E EQUIPAMENTOS --- */
+        .services-grid-section {
+            padding: 80px 5% 120px 5%; /* AUMENTADO PARA 120px PARA DESGRUDAR O CARD */
+            background-color: var(--bg-light); 
+            text-align: center;
+            position: relative; 
+        }
+
+        /* Div de proteção para a marca d'água */
+        .watermark-wrapper {
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            overflow: hidden;
+            z-index: 0;
+            pointer-events: none;
+        }
+
+        /* Marca d'água no fundo */
+        .watermark-logo {
+            position: absolute;
+            bottom: 20px;
+            left: -50px;
+            
+            width: 300px; 
+            opacity: 0.1; /* OPACIDADE AUMENTADA PARA 10% PARA FICAR VISÍVEL */
+            transform: rotate(-15deg);
+        }
+
+        .services-section-title {
+            font-family: 'Outfit', sans-serif;
+            font-size: 32px;
+            font-weight: 900;
+            color: var(--dark-blue);
+            text-transform: uppercase;
+            margin-bottom: 15px;
+            letter-spacing: -1px;
+            position: relative;
+            z-index: 2;
+        }
+
+        .services-section-subtitle {
+            font-family: 'Inter', sans-serif;
+            font-size: 18px;
+            color: var(--text-gray);
+            max-width: 800px;
+            margin: 0 auto 50px auto;
+            line-height: 1.6;
+            position: relative;
+            z-index: 2;
+        }
+
+        /* Container da Grade de Cards */
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 30px;
+            max-width: 1200px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 2;
+        }
+
+        
+
+        .service-card {
+            display: flex;
+            background-color: #ffffff;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.05);
+            border: 1px solid #e2e8f0;
+            text-align: left;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            align-items: center; /* Alinha o conteúdo verticalmente no centro */
+        }
+
+        .service-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        .service-img {
+            width: 30%; /* Reduzido de 35% para dar mais espaço ao texto */
+            flex-shrink: 0;
+            background-color: #f8fafc;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 10px; /* Reduzido de 15px */
+            align-self: stretch; /* Faz a área cinza da imagem preencher toda a altura do card */
+        }
+
+        .service-img img {
+            width: 100%;
+            height: auto;
+            max-height: 100px; /* REDUZIDO de 180px para deixar o card bem mais fino */
+            object-fit: contain;
+            mix-blend-mode: multiply;
+        }
+
+        .service-content {
+            padding: 20px 25px; /* Reduzido de 30px para afinar o card */
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .service-content h4 {
+            font-family: 'Outfit', sans-serif;
+            font-size: 19px; /* Reduzido levemente */
+            color: var(--dark-blue);
+            margin-bottom: 8px; /* Reduzido o espaço entre título e texto */
+            font-weight: 800;
+        }
+
+        .service-content p {
+            font-family: 'Inter', sans-serif;
+            font-size: 14px; /* Reduzido levemente para caber bem no card fino */
+            color: var(--text-gray);
+            line-height: 1.5; /* Reduzido o espaçamento entre linhas */
+            margin: 0;
+        }
+
+        
+
+
+        /* --- LISTA DE 3 COLUNAS --- */
+        .deliverables-container {
+            max-width: 1200px;
+            margin: 60px auto 0 auto;
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+            text-align: left;
+            position: relative;
+            z-index: 2; 
+            background: #ffffff;
+            padding: 40px;
+            border-radius: 12px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.03);
+            border: 1px solid #e2e8f0;
+        }
+
+        .deliverables-column h5 {
+            font-family: 'Outfit', sans-serif;
+            font-size: 18px;
+            color: var(--dark-blue);
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid var(--light-blue);
+        }
+
+        .deliverables-list {
+            list-style: none;
+        }
+
+        .deliverables-list li {
+            font-family: 'Inter', sans-serif;
+            font-size: 14px;
+            color: var(--text-dark);
+            margin-bottom: 12px;
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+            font-weight: 500;
+            line-height: 1.4;
+        }
+
+        .deliverables-list li i {
+            color: #10b981;
+            margin-top: 2px;
+            font-size: 14px;
+        }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* --- CARD DE LOGOS DAS NORMAS SOBREPOSTO --- */
+        /* --- CARD DE LOGOS DAS NORMAS SOBREPOSTO --- */
+        .logos-overlap-container {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            transform: translateY(50%); 
+            z-index: 20;
+            display: flex;
+            flex-direction: column; /* Empilha o texto e o card */
+            align-items: center;    /* Centraliza ambos na tela */
+            gap: 12px;              /* Espaço entre o texto e a borda do card */
+            padding: 0 5%;
+        }
+
+        .logos-overlap-card {
+            background-color: #ffffff;
+            
+            border-radius: 12px;
+            padding: 10px;
+            display: flex;
+            align-items: center;
+            max-width: 1050px;
+            width: 100%;
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+        }
+
+        .logos-header-text {
+            font-family: 'Inter', sans-serif;
+            font-size: 13px;
+            color: var(--text-dark);
+            text-align: center;
+            font-weight: 500;
+            line-height: 1.4;
+        }
+
+        .logos-header-text span {
+            font-weight: 400;
+            font-style: italic;
+            color: var(--text-gray);
+        }
+
+        /* O EFEITO DE CARROSSEL CONTÍNUO */
+        .logos-track-container {
+            width: 100%;
+            overflow: hidden;
+            position: relative;
+            /* Efeito de fade nas pontas para não cortar a imagem do nada */
+            -webkit-mask-image: linear-gradient(to right, transparent, black 5%, black 95%, transparent);
+            mask-image: linear-gradient(to right, transparent, black 5%, black 95%, transparent);
+        }
+
+        .logos-track {
+            display: flex;
+            align-items: center;
+            gap: 60px;
+            width: max-content;
+            animation: scrollLogos 20s linear infinite;
+        }
+
+        .logos-track:hover {
+            animation-play-state: paused;
+        }
+
+        .logos-track img {
+            max-height: 60px; 
+            width: auto;
+            mix-blend-mode: multiply; 
+            transition: transform 0.3s ease;
+            flex-shrink: 0;
+        }
+
+        .logos-track img:hover {
+            transform: scale(1.08);
+        }
+
+        @keyframes scrollLogos {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(calc(-50% - 30px)); } 
+        }
+
+        @media (max-width: 768px) {
+            .logos-overlap-card { padding: 20px; }
+            .logos-track img { max-height: 45px; }
+        }
+
+        /* Ajuste na Prova Social para não colar no Card */
+        .social-proof-section {
+            padding: 180px 0 0 0; /* AUMENTADO PARA 180px PARA DESGRUDAR */
+            background-color: white;
+        }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        /* Responsividade */
+        @media (max-width: 992px) {
+            .services-grid { grid-template-columns: 1fr; }
+            .deliverables-container { grid-template-columns: 1fr; }
+            .service-card { flex-direction: column; }
+            .service-img { width: 100%; height: 200px; border-bottom: 1px solid #e2e8f0; }
+            .watermark-logo { width: 300px; bottom: 0px; left: -20px; }
+            
+            .inmetro-overlap-card {
+                flex-direction: column;
+                text-align: center;
+                padding: 25px 20px;
+                gap: 15px;
+            }
+            .inmetro-overlap-card p { text-align: center; }
+            .services-grid-section { padding-bottom: 160px; } /* Dá espaço pro card não quebrar no celular */
+        }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        /* --- SEÇÃO CARROSSEL DE RELATÓRIOS (EFEITO 3D) --- */
+        .report-showcase-section {
+            padding: 60px 0 20px 0;
+            background-color: #ffffff;
+            text-align: center;
+            overflow: hidden;
+        }
+
+        .report-showcase-container {
+            position: relative;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .report-showcase-track {
+            display: flex;
+            align-items: center;
+            overflow-x: auto;
+            scroll-snap-type: x mandatory;
+            scroll-behavior: smooth;
+            padding: 50px calc(50% - 180px); /* Hack mágico para garantir que o item de 360px fique no centro */
+            gap: 40px;
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+            
+            /* O SEGREDINHO DA MÁGICA: Efeito de sumir silenciosamente nas bordas */
+            -webkit-mask-image: linear-gradient(to right, transparent 0%, black 20%, black 80%, transparent 100%);
+            mask-image: linear-gradient(to right, transparent 0%, black 20%, black 80%, transparent 100%);
+        }
+
+        .report-showcase-track::-webkit-scrollbar {
+            display: none;
+        }
+
+        .report-showcase-slide {
+            flex: 0 0 360px; /* Largura exata da folha do relatório */
+            scroll-snap-align: center;
+            transition: all 0.5s cubic-bezier(0.25, 0.8, 0.25, 1); /* Animação super fluida tipo Apple */
+            opacity: 0.4; /* Fica mais transparente quando está nas laterais */
+            transform: scale(0.8); /* Fica menor nas laterais para dar PROFUNDIDADE */
+            border-radius: 4px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+
+        .report-showcase-slide img {
+            width: 100%;
+            height: auto;
+            display: block;
+            border-radius: 4px;
+            border: 1px solid #e2e8f0;
+        }
+
+        /* Classe que o JavaScript vai injetar na folha que estiver no CENTRO */
+        .report-showcase-slide.active-slide {
+            opacity: 1;
+            transform: scale(1.1); /* Dá o zoom na folha do meio (Foco) */
+            z-index: 2;
+            box-shadow: 0 25px 50px rgba(0,26,49,0.2);
+            border-color: var(--primary-blue);
+        }
+
+        /* Setinhas Flutuantes */
+        .showcase-btn {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background-color: var(--dark-blue);
+            color: #ffffff;
+            border: none;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            cursor: pointer;
+            z-index: 10;
+            font-size: 20px;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .showcase-btn:hover {
+            background-color: var(--primary-blue);
+            transform: translateY(-50%) scale(1.1);
+        }
+
+        .showcase-btn.prev { left: 5%; }
+        .showcase-btn.next { right: 5%; }
+
+        @media (max-width: 768px) {
+            .report-showcase-track {
+                padding: 40px calc(50% - 120px); 
+                gap: 20px;
+            }
+            .report-showcase-slide { flex: 0 0 240px; }
+            .showcase-btn { width: 40px; height: 40px; font-size: 16px; }
+            .showcase-btn.prev { left: 2%; }
+            .showcase-btn.next { right: 2%; }
+        }
+
+
+
+
+
+
+
+
+
+
+        /* --- PROVA SOCIAL COMPLETO --- */
+       
+
+        .carousel-wrapper {
+            background-color: #ffffff;
+            padding: 20px 5% 40px 5%; 
+            width: 100%;
+            box-shadow: 0 10px 30px rgba(0, 26, 49, 0.03);
+            margin-bottom: 0; /* Tiramos a margem de 40px que gerava a faixa cinza */
+        }
+
+        .social-proof-carousel {
+            display: flex;
+            gap: 24px;
+            overflow-x: auto;
+            scroll-snap-type: x mandatory;
+            padding-bottom: 10px;
+            -ms-overflow-style: none; /* Esconde scrollbar nativa IE/Edge */
+            scrollbar-width: none; /* Esconde scrollbar nativa Firefox */
+        }
+        
+        .social-proof-carousel::-webkit-scrollbar {
+            display: none; /* Esconde scrollbar nativa Chrome/Safari */
+        }
+
+        /* --- ESTRUTURA DOS CARDS --- */
+        /* --- ESTRUTURA DOS CARDS (ATUALIZADA: MAIS FINOS) --- */
+        .sp-card {
+            flex: 0 0 calc(33.333% - 16px); 
+            scroll-snap-align: start;
+            background: var(--bg-light);
+            border: 1px solid #f1f1f1;
+            border-radius: 12px;
+            padding: 10px; /* Reduzido de 30px */
+            display: flex;
+            flex-direction: column;
+            transition: transform 0.3s ease;
+        }
+
+        .sp-card:hover {
+            transform: translateY(-3px);
+            border-color: var(--accent-color);
+            cursor: pointer;
+        }
+
+        .sp-user-info {
+            display: flex;
+            align-items: center;
+            gap: 12px; /* Reduzido de 15px */
+            margin-bottom: 12px; /* Reduzido de 20px */
+        }
+
+        .sp-avatar {
+            width: 45px; /* Reduzido de 60px */
+            height: 45px; /* Reduzido de 60px */
+            border-radius: 50%;
+            object-fit: cover;
+            border: 2px solid var(--primary-blue);
+        }
+
+        .sp-name-role {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            text-align: left;
+        }
+
+        .sp-name {
+            font-family: 'Outfit', sans-serif;
+            font-size: 16px; /* Reduzido de 20px */
+            font-weight: 800;
+            color: var(--dark-blue);
+        }
+
+        .sp-role {
+            font-family: 'Inter', sans-serif;
+            font-size: 12px; /* Reduzido de 14px */
+            color: var(--text-gray);
+            font-weight: 500;
+            line-height: 1.2;
+            margin-top: 2px;
+        }
+
+        .sp-text {
+            font-family: 'Inter', sans-serif;
+            font-size: 13px; /* Reduzido de 15px */
+            color: var(--text-dark);
+            font-style: italic;
+            line-height: 1.4; /* Reduzido de 1.6 */
+            margin: 0;
+        }
+
+        /* --- PONTINHOS DO CARROSSEL --- */
+        .carousel-dots {
+            display: flex;
+            justify-content: center;
+            gap: 8px;
+            margin-top: 5px;
+        }
+
+        .dot {
+            width: 8px;
+            height: 8px;
+            background-color: #cbd5e1;
+            border-radius: 50%;
+            cursor: pointer;
+            transition: background-color 0.3s ease, transform 0.3s ease;
+        }
+
+        .dot:hover {
+            background-color: #94a3b8;
+        }
+
+        .dot.active {
+            background-color: var(--primary-blue);
+            transform: scale(1.3);
+        }
+
+        /* --- BOTÃO --- */
+        .sp-action {
+            text-align: center;
+            padding: 0 5%;
+        }
+
+        .sp-btn {
+            display: inline-block;
+            background-color: var(--cta-color);
+            color: #000;
+            font-family: 'Inter', sans-serif;
+            font-size: 16px;
+            font-weight: 600;
+            text-decoration: none;
+            padding: 16px 40px;
+            border-radius: 50px;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+        }
+
+        .sp-btn:hover {
+            background-color: var(--cta-hover);
+            transform: translateY(-2px);
+        }
+
+        /* --- RESPONSIVIDADE --- */
+        @media (max-width: 1024px) {
+            .sp-card {
+                flex: 0 0 calc(50% - 12px);
+            }
+        }
+
+        @media (max-width: 600px) {
+            .sp-card {
+                flex: 0 0 85%;
+            }
+            .carousel-wrapper {
+                padding: 40px 5%;
+            }
+        }
+
+
+
+
+
+
+
+        /* --- CARROSSEL DE VÍDEOS MOBILE --- */
+        /* --- CARROSSEL DE VÍDEOS MOBILE --- */
+        .video-carousel-section {
+            margin-top: 10px;
+            padding-top: 30px;
+            border-top: 1px solid #e4e5e688;
+            text-align: center;
+        }
+        
+        .video-carousel-title {
+            font-family: 'Outfit', sans-serif;
+            font-size: 22px;
+            color: var(--dark-blue);
+            margin-bottom: 25px;
+            font-weight: 800;
+        }
+
+        .video-carousel-container {
+            display: flex;
+            gap: 25px; /* Aumentado o gap entre os vídeos */
+            overflow-x: auto;
+            scroll-snap-type: x mandatory;
+            padding-bottom: 20px;
+            -ms-overflow-style: none; 
+            scrollbar-width: none; 
+            justify-content: center;
+            align-items: flex-start;
+        }
+
+        .video-carousel-container::-webkit-scrollbar {
+            display: none; 
+        }
+
+        /* Container que agrupa o vídeo e o texto embaixo */
+        .video-item-wrapper {
+            flex: 0 0 auto;
+            scroll-snap-align: center;
+            width: 220px; /* Largura levemente maior */
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        /* O Card do Vídeo (Thumbnail) */
+        .video-card {
+            width: 100%;
+            height: 390px;
+            border-radius: 12px;
+            overflow: hidden;
+            background-color: #000;
+            box-shadow: 0 10px 25px rgba(0, 26, 49, 0.08);
+            border: 1px solid #e2e8f0;
+            position: relative;
+            cursor: pointer; /* Indica que é clicável */
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .video-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 35px rgba(0, 26, 49, 0.15);
+        }
+
+        .video-card video {
+            width: 100%;
+            height: 100%;
+            object-fit: cover; /* Preenche o thumbnail */
+            pointer-events: none; /* Desativa o clique no vídeo para o clique ir para o card inteiro */
+        }
+
+        /* --- CABEÇALHO DO VÍDEO (Preto Translúcido + Profissão) --- */
+        .video-header {
+            position: absolute;
+            top: 0; left: 0; width: 100%;
+            background-color: rgba(0, 0, 0, 0.75); /* Preto translúcido */
+            padding: 10px 12px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            z-index: 5;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.15);
+        }
+
+        .video-header img {
+            width: 35px;
+            height: 35px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 1px solid #cbd5e1;
+        }
+
+        .vh-text {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            overflow: hidden;
+        }
+
+        .vh-name {
+            font-family: 'Inter', sans-serif;
+            font-size: 14px;
+            color: #ffffff;
+            font-weight: 700;
+            white-space: nowrap;
+        }
+
+        .vh-role {
+            font-family: 'Inter', sans-serif;
+            font-size: 11px;
+            color: #cbd5e1;
+            font-weight: 500;
+            white-space: nowrap;
+        }
+
+        /* Ícone de Play centralizado no Thumbnail */
+        .play-icon-overlay {
+            position: absolute;
+            top: 50%; left: 50%;
+            transform: translate(-50%, -50%);
+            width: 50px; height: 50px;
+            background-color: rgba(255, 183, 0, 0.9); /* Cor do seu CTA */
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #000;
+            font-size: 20px;
+            z-index: 5;
+            padding-left: 4px; /* Centraliza o triângulo do play */
+            transition: transform 0.3s ease;
+        }
+
+        .video-card:hover .play-icon-overlay {
+            transform: translate(-50%, -50%) scale(1.1);
+        }
+
+        /* --- TEXTO DE DEPOIMENTO ABAIXO DO VÍDEO --- */
+        .video-testimonial {
+            font-family: 'Inter', sans-serif;
+            font-size: 13px;
+            color: var(--text-dark);
+            font-style: italic;
+            text-align: left;
+            line-height: 1.5;
+            margin: 0;
+            padding: 0 5px;
+        }
+
+        /* --- MODAL (LIGHTBOX) DO VÍDEO TELA CHEIA --- */
+        .video-modal-overlay {
+            position: fixed;
+            top: 0; left: 0; width: 100vw; height: 100vh;
+            background-color: rgba(0, 26, 49, 0.95); /* Fundo escuro */
+            z-index: 9999;
+            display: none; /* Escondido por padrão */
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .video-modal-overlay.active {
+            opacity: 1;
+        }
+
+        .video-modal-content {
+            position: relative;
+            width: 90%;
+            max-width: 450px; /* Restringe a largura máxima para não esticar no PC */
+            max-height: 85vh; /* Respeita a altura da tela */
+            background-color: #000;
+            border-radius: 16px;
+            box-shadow: 0 25px 50px rgba(0,0,0,0.5);
+            transform: scale(0.9);
+            transition: transform 0.3s ease;
+        }
+
+        .video-modal-overlay.active .video-modal-content {
+            transform: scale(1); /* Efeito de entrada suave */
+        }
+
+        .video-modal-content video {
+            width: 100%;
+            height: 100%;
+            max-height: 85vh;
+            border-radius: 16px;
+            object-fit: contain; /* GARANTE QUE NÃO CORTA NEM ESTICA */
+            outline: none;
+            display: block;
+        }
+
+        .close-video-modal {
+            position: absolute;
+            top: -15px; right: -15px;
+            background-color: var(--cta-color);
+            color: #000;
+            border: none;
+            width: 40px; height: 40px;
+            border-radius: 50%;
+            font-size: 20px;
+            cursor: pointer;
+            z-index: 10000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+            transition: transform 0.2s ease;
+        }
+
+        .close-video-modal:hover {
+            transform: scale(1.1);
+        }
+
+        @media (max-width: 768px) {
+            .video-carousel-container {
+                justify-content: flex-start;
+                padding: 0 5%;
+            }
+            .video-item-wrapper {
+                width: 180px;
+            }
+            .video-card {
+                height: 320px;
+            }
+        }
+
+
+
+
+        
+
+        /* --- PREÇOS --- */
+
+        section-title-pricing{
+            color: white !important;
+
+        }
+
+
+
+        .pricing-section {
+            padding: 100px 5%;
+            background-color: #000000;
+            text-align: center;
+        }
+        
+
+        .pricing-card-modern {
+            background: #ffffff;
+            border: 2px solid var(--dark-blue);
+            border-radius: 24px;
+            padding: 50px;
+            max-width: 480px;
+            margin: 50px auto 0;
+            box-shadow: 0 25px 50px rgba(0, 26, 49, 0.1);
+            position: relative;
+            text-align: left;
+        }
+
+        .pricing-badge {
+            position: absolute;
+            top: -16px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: var(--cta-color);
+            color: #000;
+            padding: 8px 24px;
+            border-radius: 50px;
+            font-weight: 800;
+            font-family: 'Outfit', sans-serif;
+            font-size: 14px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            box-shadow: 0 4px 10px rgba(255, 183, 0, 0.3);
+        }
+
+        .pricing-header {
+            text-align: center;
+            margin-bottom: 30px;
+            padding-bottom: 30px;
+            border-bottom: 1px solid #e2e8f0;
+        }
+
+        .pricing-header h3 {
+            font-size: 24px;
+            color: var(--dark-blue);
+            margin-bottom: 15px;
+        }
+
+        .price-strike {
+            text-decoration: line-through;
+            color: #94a3b8;
+            font-size: 18px;
+            font-weight: 600;
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        .price-amount {
+            font-size: 64px;
+            font-weight: 600;
+            font-family: 'Outfit', sans-serif;
+            color: var(--dark-blue);
+            line-height: 1;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+        }
+
+        .price-currency {
+            font-size: 24px;
+            margin-top: 8px;
+            margin-right: 5px;
+        }
+
+        .pricing-features {
+            list-style: none;
+            margin-bottom: 40px;
+        }
+
+        .pricing-features li {
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+            margin-bottom: 16px;
+            font-size: 16px;
+            color: var(--text-dark);
+            font-weight: 500;
+        }
+
+        .pricing-features li i {
+            color: #10b981;
+            font-size: 20px;
+            margin-top: 2px;
+        }
+
+        .btn-pricing {
+            display: block;
+            width: 100%;
+            text-align: center;
+            background-color: #f5a600;
+            color: #000000;
+            padding: 10px;
+            border-radius: 12px;
+            font-family: 'Outfit', sans-serif;
+            font-size: 18px;
+            font-weight: 800;
+            text-decoration: none;
+            text-transform: uppercase;
+            transition: all 0.3s ease;
+        }
+
+        .btn-pricing:hover {
+            background-color: var(--primary-blue);
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(0, 102, 161, 0.2);
+            color: white
+        }
+
+        /* --- FOOTER --- */
+        footer {
+            background-color: var(--dark-blue);
+            color: #ffffff;
+            padding: 80px 5% 40px;
+        }
+
+        .footer-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 50px;
+            margin-bottom: 60px;
+        }
+
+        .footer-col h4 {
+            font-size: 20px;
+            margin-bottom: 25px;
+            font-weight: 700;
+            color: #ffffff;
+        }
+
+        .footer-col ul { list-style: none; }
+        .footer-col ul li { margin-bottom: 15px; }
+        .footer-col ul li a {
+            color: #cbd5e1;
+            text-decoration: none;
+            font-size: 15px;
+            transition: color 0.3s;
+        }
+        .footer-col ul li a:hover { color: var(--cta-color); }
+
+        .footer-contact {
+            display: flex;
+            align-items: flex-start;
+            gap: 15px;
+            margin-bottom: 20px;
+            color: #cbd5e1;
+            font-size: 15px;
+        }
+
+        .footer-contact i {
+            color: var(--accent-color);
+            margin-top: 4px;
+        }
+
+        .social-icons {
+            display: flex;
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .social-icons a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            background: rgba(255,255,255,0.05);
+            border-radius: 50%;
+            color: #ffffff;
+            transition: all 0.3s;
+        }
+
+        .social-icons a:hover {
+            background: var(--cta-color);
+            color: #000;
+        }
+
+        /* Responsividade */
+        @media (max-width: 1024px) {
+            .header-contacts { display: none; }
+        }
+        
+        @media (max-width: 768px) {
+            .client-area-btn { display: none; }
+            .footer-content { flex-direction: column; }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="header-left">
+            <div class="logo">
+                
+                <div>
+                    NR13
+                    <span>AUTODOCS</span>
+                </div>
+            </div>
+        </div>
+
+        
+
+        <div class="header-contacts">
+            <div><i class="fa-brands fa-whatsapp"></i> (27) ver telefone</div>
+            <div><i class="fa-regular fa-envelope"></i> contato@normaseng.com.br</div>
+        </div>
+
+        <div class="header-right">
+            <a href="#" class="client-area-btn">Área de Login <i class="fa-regular fa-user"></i></a>
+            <div class="menu-btn">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </header>
+
+
+
+
+
+
+    <section class="hero-section">
+        <div class="hero-content">
+            <h1 class="hero-title">Gere Relatorios de inspeção NR-13 Completos em Segundos e Escale sua produtividade e lucro</h1>
+            <p class="hero-text">Esqueça o Word e planilhas manuais. Centralize clientes, organize inspeções em campo com sua equipe e entregue laudos com memoriais de cálculo injetados automaticamente em 1 clique.</p>
+            <a href="#planos" class="btn-hero">Quero automatizar minhas inspeções</a>
+            <span class="hero-trust">Mais de 340 engenheiros aprovam nosso sistema.</span>
+        </div>
+    </section>
+
+    <div class="system-compliance-section">
+            <div class="compliance-checklist">
+                <h3>TUDO O QUE VOCÊ PRECISA EM UM UNICO LUGAR:</h3>
+                <ul>
+                    <li><i class="fa-solid fa-circle-check"></i> Gestão de Equipamentos e Clientes</li>
+                    <li><i class="fa-solid fa-circle-check"></i> Croqui Gerado pelo Memorial</li>
+                    <li><i class="fa-solid fa-circle-check"></i> Container de Inspeção Mobile</li>
+                    <li><i class="fa-solid fa-circle-check"></i> Geração de Laudos em 1 Clique</li>
+                    <li><i class="fa-solid fa-circle-check"></i> Memorial Injetado Automaticamente</li>
+                    <li><i class="fa-solid fa-circle-check"></i> Assinatura Digital e A-R-T</li>
+                    <li><i class="fa-solid fa-circle-check"></i> Alerta de Vencimentos</li>
+                </ul>
+            </div>
+            
+            <div class="compliance-badge">
+                <img src="asme.webp" alt="Selo ASME" class="asme-img">
+                <p>Sistema desenvolvido em conformidade com as normas <strong>ASME VIII Div. 1</strong> e <strong>NR-13</strong>.</p>
+            </div>
+        </div>
+    
+
+
+        <section class="how-it-works-section" id="como-funciona">
+        <h2 class="section-title">COMO O SISTEMA FUNCIONA</h2>
+        <p class="section-subtitle">Do cadastro do equipamento à geração do laudo técnico, tudo automatizado em um fluxo de trabalho inteligente.</p>
+
+        <div class="feature-container">
+            
+            <div class="feature-row">
+                <div class="feature-text">
+                    <h3>1. GESTAO CENTRALIZA DE CLIENTES E EQUIPAMENTOS</h3>
+                    <p>Mantenha todo o seu portfólio organizado. Cadastre clientes, adicione vasos de pressão, caldeiras e tubulações em uma interface limpa, com todos os dados técnicos acessíveis a qualquer momento.</p>
+                    <ul>
+                        <li><i class="fa-solid fa-check-double"></i> Histórico completo de inspeções por tag</li>
+                        <li><i class="fa-solid fa-check-double"></i> Alertas automáticos de vencimento de calibração e exames</li>
+                    </ul>
+                </div>
+                <div class="feature-image">
+                    <img src="sistema1.PNG" alt="Tela de Gestão de Equipamentos NR-13">
+                </div>
+            </div>
+
+            <div class="feature-row reverse">
+                <div class="feature-text">
+                    <h3>2. COLETA DE DADOS COM O CELULAR EM CAMPO</h3>
+                    <p>Abandone a prancheta e o papel. Nosso container de inspeção foi projetado para ser usado direto do seu celular ou tablet enquanto você está na planta do cliente realizando as medições reais de espessura.</p>
+                    <ul>
+                        <li><i class="fa-solid fa-check-double"></i> Layout responsivo e otimizado para o campo</li>
+                        <li><i class="fa-solid fa-check-double"></i> Registro fotográfico anexado direto no app</li>
+                    </ul>
+                </div>
+                <div class="feature-image">
+                    <img src="sistema2.PNG" alt="Tela do Sistema Mobile para Inspeção">
+                </div>
+            </div>
+
+            <div class="feature-row">
+                <div class="feature-text">
+                    <h3>3. GERACAO DE MEMORIAL E CROQUI COM UM CLIQUE</h3>
+                    <p>A mágica da automação acontece aqui. O sistema processa os dados coletados e gera o laudo NR-13 formatado, injetando automaticamente o cálculo estrutural (ASME VIII Div. 1) e o croqui do equipamento.</p>
+                    <ul>
+                        <li><i class="fa-solid fa-check-double"></i> Puxa os dados que foram salvos em campo [Ex: Medicao espessura]</li>
+                        <li><i class="fa-solid fa-check-double"></i> Seleciona os itens que vao compor o relatório</li>
+                        <li><i class="fa-solid fa-check-double"></i> Verifica tudo, assina digitalmente com um clique e Imprime!</li>
+                    </ul>
+                </div>
+                <div class="feature-image">
+                    <img src="sistema3.PNG" alt="Tela de Geração de Laudos e Memoriais NR-13">
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+
+
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
+    <!-- NOVA SEÇÃO: GRADE DE SERVIÇOS E ENTREGÁVEIS -->
+    <section class="services-grid-section" id="equipamentos">
+        
+        <!-- Marca d'água encapsulada para não dar scroll lateral -->
+        <div class="watermark-wrapper">
+            <img src="asme.webp" alt="Marca D'água" class="watermark-logo">
+        </div>
+
+        <h2 class="services-section-title">Automatize sua Engenharia</h2>
+        <p class="services-section-subtitle">Gere relatórios para vasos, caldeiras, autoclaves, tubulações, tanques, manutenção de válvula, certificados de calibração etc...</p>
+
+        <!-- Grade com 4 Cards -->
+        <div class="services-grid">
+            <div class="service-card">
+                <div class="service-img">
+                    <img src="vasopressao.jpg" alt="Vasos de Pressão">
+                </div>
+                <div class="service-content">
+                    <h4>NR-13 - Vasos de Pressão</h4>
+                    <p>Gere prontuários completos e laudos de inspeção estrutural para vasos de pressão horizontais e verticais, com injeção automática de memorial de cálculo.</p>
+                </div>
+            </div>
+
+            <div class="service-card">
+                <div class="service-img">
+                    <img src="caldeira.jpg" alt="Caldeiras">
+                </div>
+                <div class="service-content">
+                    <h4>NR-13 - Caldeiras</h4>
+                    <p>Relatórios padronizados para caldeiras de diversas categorias. Controle preciso de testes hidrostáticos, espessura e dispositivos de segurança.</p>
+                </div>
+            </div>
+
+            <div class="service-card">
+                <div class="service-img">
+                    <img src="autoclave.png" alt="Autoclaves">
+                </div>
+                <div class="service-content">
+                    <h4>NR-13 - Autoclaves</h4>
+                    <p>Documentação específica para equipamentos hospitalares e industriais, garantindo a conformidade total com as normativas de esterilização e pressão.</p>
+                </div>
+            </div>
+
+            <div class="service-card">
+                <div class="service-img">
+                    <img src="tubulacoes.PNG" alt="Tubulações e Tanques">
+                </div>
+                <div class="service-content">
+                    <h4>Tubulações e Tanques</h4>
+                    <p>Inspeção periódica e laudos de integridade para linhas de tubulações e tanques metálicos de armazenamento, mapeando espessuras e desgastes.</p>
+                </div>
+            </div>
+
+
+            <div class="service-card">
+                <div class="service-img">
+                    <img src="compressor.PNG" alt="Compressores">
+                </div>
+                <div class="service-content">
+                    <h4>NR-13 - Compressores</h4>
+                    <p>Adequação completa e prontuários para compressores,  </p>
+                </div>
+            </div>
+
+            <div class="service-card">
+                <div class="service-img">
+                    <img src="valvula.PNG" alt="Válvulas PSV">
+                </div>
+                <div class="service-content">
+                    <h4>Válvulas de Segurança (PSV)</h4>
+                    <p>Controle de calibração, histórico de manutenção periódica e laudos automáticos de testes de bancada para válvulas de alívio e segurança. Certificado de calibração injetado no final do relatorio, junto com a placa de identificação.</p>
+                </div>
+            </div>
+
+
+        </div>
+
+        <!-- 3 Colunas de Entregáveis -->
+        <div class="deliverables-container">
+            
+            <div class="deliverables-column">
+                <h5>Laudos e Cálculos Estruturais</h5>
+                <ul class="deliverables-list">
+                    <li><i class="fa-solid fa-check"></i> Memorial de Cálculo ASME VIII Div. 1</li>
+                    <li><i class="fa-solid fa-check"></i> Cálculo Automático de PMTA</li>
+                    <li><i class="fa-solid fa-check"></i> Cálculo de Espessura Mínima Exigida</li>
+                    <li><i class="fa-solid fa-check"></i> Geração de Croqui e Diagramas</li>
+                    <li><i class="fa-solid fa-check"></i> Relatório Fotográfico Anexado</li>
+                    <li><i class="fa-solid fa-check"></i> Cálculo de Vida Útil Restante</li>
+                    <li><i class="fa-solid fa-check"></i> Laudo Técnico de Inspeção Visual</li>
+                    <li><i class="fa-solid fa-check"></i> Relatório de Teste Hidrostático</li>
+                    <li><i class="fa-solid fa-check"></i> Anexação Automática de Placa de ID</li>
+                    <li><i class="fa-solid fa-check"></i> Certificados de Calibração Anexados</li>
+                </ul>
+            </div>
+
+            <div class="deliverables-column">
+                <h5>Gestão e Controle de Ativos</h5>
+                <ul class="deliverables-list">
+                    <li><i class="fa-solid fa-check"></i> Gestão Centralizada de Clientes</li>
+                    <li><i class="fa-solid fa-check"></i> Cadastro Ilimitado de Equipamentos</li>
+                    <li><i class="fa-solid fa-check"></i> Painel de Controle de Vencimentos</li>
+                    <li><i class="fa-solid fa-check"></i> Alertas Automáticos de Próxima Inspeção</li>
+                    <li><i class="fa-solid fa-check"></i> Histórico Completo de Inspeções</li>
+                    <li><i class="fa-solid fa-check"></i> Controle de Válvulas de Segurança (PSV)</li>
+                    <li><i class="fa-solid fa-check"></i> Gestão de Manômetros e Instrumentos</li>
+                    <li><i class="fa-solid fa-check"></i> Rastreabilidade Total de Alterações</li>
+                    <li><i class="fa-solid fa-check"></i> Dashboard Gerencial de Produtividade</li>
+                    <li><i class="fa-solid fa-check"></i> Organização de Documentos Auxiliares</li>
+                </ul>
+            </div>
+
+            <div class="deliverables-column">
+                <h5>Plataforma e Mobilidade</h5>
+                <ul class="deliverables-list">
+                    <li><i class="fa-solid fa-check"></i> Acesso Mobile em Nuvem Segura</li>
+                    <li><i class="fa-solid fa-check"></i> Coleta Rápida de Dados em Campo</li>
+                    <li><i class="fa-solid fa-check"></i> Inserção de Fotos Direto da Câmera</li>
+                    <li><i class="fa-solid fa-check"></i> Assinatura Digital do Engenheiro</li>
+                    <li><i class="fa-solid fa-check"></i> Personalização com Logo da Sua Empresa</li>
+                    <li><i class="fa-solid fa-check"></i> Integração para Emissão de A-R-T</li>
+                    <li><i class="fa-solid fa-check"></i> Layout Responsivo (Celular, Tablet e PC)</li>
+                    <li><i class="fa-solid fa-check"></i> Compartilhamento Rápido em PDF</li>
+                    <li><i class="fa-solid fa-check"></i> Backups Automáticos e Proteção de Dados</li>
+                    <li><i class="fa-solid fa-check"></i> Suporte Técnico Especializado em NR-13</li>
+                </ul>
+            </div>
+
+        </div>
+
+        <!-- CARD DE LOGOS SOBREPOSTO (Aparece entre as seções) -->
+        <div class="logos-overlap-container">
+            
+            <div class="logos-header-text">
+                Sistema adequado corretamente às exigências e unidade de medida dos sistemas de controle. Sistema revisado por engenheiro habilitado <span>@copyright</span>
+            </div>
+
+            <div class="logos-overlap-card">
+                
+                <div class="logos-track-container">
+                    <div class="logos-track">
+                        <img src="imetro.png" alt="Inmetro">
+                        <img src="asme.webp" alt="ASME">
+                        <img src="abendi.jpg" alt="ABENDI">
+                        <img src="cmse.jpg" alt="CMSE Segurança">
+                        <img src="abnt.jpg" alt="ABNT">
+                        
+                        <img src="imetro.png" alt="Inmetro">
+                        <img src="asme.webp" alt="ASME">
+                        <img src="abendi.jpg" alt="ABENDI">
+                        <img src="cmse.jpg" alt="CMSE Segurança">
+                        <img src="abnt.jpg" alt="ABNT">
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+    </section>
+
+
+
+
+
+
+
+
+
+
+    <section class="report-showcase-section">
+        <div class="report-showcase-container">
+            
+            <button class="showcase-btn prev" id="btn-showcase-prev"><i class="fa-solid fa-chevron-left"></i></button>
+            <button class="showcase-btn next" id="btn-showcase-next"><i class="fa-solid fa-chevron-right"></i></button>
+
+            <div class="report-showcase-track" id="report-showcase-track">
+                
+                <div class="report-showcase-slide active-slide"><img src="rel1.PNG" alt="Folha 1"></div>
+                <div class="report-showcase-slide"><img src="rel2.PNG" alt="Folha 2"></div>
+                <div class="report-showcase-slide"><img src="rel3.PNG" alt="Folha 3"></div>
+                <div class="report-showcase-slide"><img src="rel4.jpg" alt="Folha 4"></div>
+                <div class="report-showcase-slide"><img src="rel5.jpg" alt="Folha 5"></div>
+                
+                </div>
+        </div>
+    </section>
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <!-- PROVA SOCIAL RECONSTRUÍDA -->
+    <section class="social-proof-section" id="prova-social">
+        <h2 class="section-title">QUEM USA APROVA!</h2>
+        <p class="section-subtitle" style="margin-bottom: 20px;">Veja o que engenheiros que usam o sistema dizem...</p>
+
+        <div class="carousel-wrapper">
+            <div class="social-proof-carousel" id="sp-carousel">
+                
+                <div class="sp-card">
+                    <div class="sp-user-info">
+                        <img src="https://i.pravatar.cc/150?img=11" alt="Foto Engenheiro" class="sp-avatar">
+                        <div class="sp-name-role">
+                            <h3 class="sp-name">Carlos Eduardo</h3>
+                            <span class="sp-role">Engenheiro Mecânico Sênior <br> CREA: 125487/SP</span>
+                        </div>
+                    </div>
+                    <p class="sp-text">"Automatizar a geração de laudos de compressores e vasos de pressão mudou o jogo por aqui. O que antes me tomava horas, agora sai formatado e com o memorial de cálculo ASME VIII perfeito em minutos."</p>
+                </div>
+
+                <div class="sp-card">
+                    <div class="sp-user-info">
+                        <img src="https://i.pravatar.cc/150?img=5" alt="Foto Engenheira" class="sp-avatar">
+                        <div class="sp-name-role">
+                            <h3 class="sp-name">Mariana Silva</h3>
+                            <span class="sp-role">Projetista</span>
+                        </div>
+                    </div>
+                    <p class="sp-text">"Acredito que a áanter a empresimentos intdeu muita segurança."</p>
+                </div>
+
+                <div class="sp-card">
+                    <div class="sp-user-info">
+                        <img src="https://i.pravatar.cc/150?img=33" alt="Foto Inspetor" class="sp-avatar">
+                        <div class="sp-name-role">
+                            <h3 class="sp-name">Ricardo Mendes</h3>
+                            <span class="sp-role">Inspetor de Equipamentos</span>
+                        </div>
+                    </div>
+                    <p class="sp-text">"O layout limpo e a modelagem 3D inteligente impressionam meus clientes finais. Consigo cobrar mais caro pelos meus serviços de inspeção NR-13 apenas pelo nível do material entregue."</p>
+                </div>
+
+                <div class="sp-card">
+                    <div class="sp-user-info">
+                        <img src="https://i.pravatar.cc/150?img=12" alt="Foto Engenheiro" class="sp-avatar">
+                        <div class="sp-name-role">
+                            <h3 class="sp-name">Roberto Alves</h3>
+                            <span class="sp-role">Engenheiro Mecânico <br> CREA: 854123/MG</span>
+                        </div>
+                    </div>
+                    <p class="sp-text">"Excelente plataforma. Ter a assinatura digital embutida acelerou muito o processo de liberação dos prontuários. Suporte técnico sempre muito prestativo quando preciso tirar dúvidas."</p>
+                </div>
+
+                <div class="sp-card">
+                    <div class="sp-user-info">
+                        <img src="https://i.pravatar.cc/150?img=47" alt="Foto Engenheira" class="sp-avatar">
+                        <div class="sp-name-role">
+                            <h3 class="sp-name">Fernanda Costa</h3>
+                            <span class="sp-role">Engenheira Mecânica <br> CREA: 541298/RJ</span>
+                        </div>
+                    </div>
+                    <p class="sp-text">"Consegui escalar meus contratos de adequação e inspeção. A plataforma é robusta, puramente focada no que o engenheiro precisa para o dia a dia, sem complicações."</p>
+                </div>
+
+            </div>
+            
+            <!-- PONTINHOS DO CARROSSEL DE CARDS  -->
+            <div class="carousel-dots" id="carousel-dots">
+                <span class="dot active" data-index="0"></span>
+                <span class="dot" data-index="1"></span>
+                <span class="dot" data-index="2"></span>
+                <span class="dot" data-index="3"></span>
+                <span class="dot" data-index="4"></span>
+            </div>
+
+
+
+            
+            
+
+
+                <div class="video-carousel-section">
+                
+                
+                <div class="video-carousel-container">
+                    
+                    <div class="video-item-wrapper">
+                        <div class="video-card">
+                            <div class="video-header">
+                                <img src="https://i.pravatar.cc/150?img=11" alt="Carlos">
+                                <div class="vh-text">
+                                    <span class="vh-name">Carlos Eduardo</span>
+                                    <span class="vh-role">Eng. Mecânico Sênior</span>
+                                </div>
+                            </div>
+                            <div class="play-icon-overlay"><i class="fa-solid fa-play"></i></div>
+                            <video src="video1.mp4" preload="metadata"></video>
+                        </div>
+                        <p class="video-testimonial">"Sensacional! poupa horas de digitação e a documentação sai esteticamente bonita"</p>
+                    </div>
+
+                    
+                    
+                </div>
+            </div>
+
+            <div class="video-modal-overlay" id="videoModalOverlay">
+                <div class="video-modal-content">
+                    <button class="close-video-modal" id="closeVideoModal"><i class="fa-solid fa-xmark"></i></button>
+                    <video id="modalVideoPlayer" controls playsinline></video>
+                </div>
+            </div>
+
+        
+                    
+
+
+
+
+
+        </div>
+
+    </section>
+
+
+
+
+
+
+
+
+    <!-- PREÇOS RECONSTRUÍDO -->
+    <section class="pricing-section" id="planos">
+        <h2 style="font-weight: bold; color: #ffffff; font-size: 1.5em;">Padronize, Evite multas. Automatize, evite custos</h2>
+        <p class="section-subtitle" style="margin-bottom: 20px;">
+            A concorrência está automatizando processos e pegando os melhores contratos. Assine agora e passe a entregar laudos premium em uma fração do tempo.
+        </p>
+
+        <div class="pricing-card-modern">
+            <div class="pricing-badge">Oferta Exclusiva</div>
+            
+            <div class="pricing-header">
+                <h3>Licença Profissional Completa</h3>
+                <span class="price-strike">De R$ 2.497,00</span>
+                <div class="price-amount">
+                    <span class="price-currency">R$</span>997<span style="font-size: 24px; margin-top: 35px;">,00</span>
+                </div>
+            </div>
+
+            <ul class="pricing-features">
+                <li><i class="fa-solid fa-circle-check"></i> Gerador de Laudos NR-13 em 1 Clique</li>
+                <li><i class="fa-solid fa-circle-check"></i> Memorial de Cálculo Injetado (ASME VIII)</li>
+                <li><i class="fa-solid fa-circle-check"></i> Croqui e Modelagem 3D Inteligente</li>
+                <li><i class="fa-solid fa-circle-check"></i> Gestão de Vencimentos e Acessórios</li>
+                <li><i class="fa-solid fa-circle-check"></i> Assinatura Digital e Integração A-R-T</li>
+                <li><i class="fa-solid fa-circle-check"></i> Suporte Técnico de Engenharia</li>
+            </ul>
+
+            <a href="#comprar" class="btn-pricing">Garantir Meu Acesso Agora</a>
+        </div>
+    </section>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-col">
+                <h4>NR13 AutoDocs</h4>
+                <p style="color: #cbd5e1; margin-bottom: 20px; font-size: 15px;">A solução definitiva para engenheiros que buscam escala, segurança e produtividade na gestão de integridade estrutural.</p>
+                <div class="footer-contact">
+                    <i class="fa-solid fa-headset" style="font-size: 20px;"></i>
+                    <div>
+                        <strong style="color: white; display: block; margin-bottom: 5px;">Suporte Técnico</strong>
+                        contato@nr13autodocs.com.br<br>
+                        (27) 99253-4407
+                    </div>
+                </div>
+            </div>
+            
+            <div class="footer-col">
+                <h4>Links Úteis</h4>
+                <ul>
+                    <li><a href="#">Área do Cliente</a></li>
+                    <li><a href="#">Como Funciona</a></li>
+                    <li><a href="#">Termos de Serviço</a></li>
+                    <li><a href="#">Política de Privacidade</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-col">
+                <h4>Conecte-se conosco</h4>
+                <p style="color: #cbd5e1; font-size: 15px; margin-bottom: 15px;">Acompanhe nossas atualizações de engenharia e tecnologia.</p>
+                <div class="social-icons">
+                    <a href="#"><i class="fa-brands fa-youtube"></i></a>
+                    <a href="#"><i class="fa-brands fa-linkedin-in"></i></a>
+                    <a href="#"><i class="fa-brands fa-instagram"></i></a>
+                </div>
+            </div>
+        </div>
+        <div style="text-align: center; color: #64748b; font-size: 14px; border-top: 1px solid rgba(255,255,255,0.05); padding-top: 30px;">
+            &copy; 2026 NR13 AutoDocs. Todos os direitos reservados.
+        </div>
+    </footer>
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const carousel = document.getElementById('sp-carousel');
+            const dots = document.querySelectorAll('.dot');
+
+            if(carousel && dots.length > 0) {
+                // Atualiza o pontinho ativo ao rolar
+                carousel.addEventListener('scroll', () => {
+                    const cardWidth = carousel.querySelector('.sp-card').offsetWidth + 24; 
+                    const activeIndex = Math.round(carousel.scrollLeft / cardWidth);
+
+                    dots.forEach((dot, index) => {
+                        if (index === activeIndex) {
+                            dot.classList.add('active');
+                        } else {
+                            dot.classList.remove('active');
+                        }
+                    });
+                });
+
+                // Permite clicar no pontinho para ir até o card
+                dots.forEach((dot, index) => {
+                    dot.addEventListener('click', () => {
+                        const cardWidth = carousel.querySelector('.sp-card').offsetWidth + 24;
+                        carousel.scrollTo({
+                            left: index * cardWidth,
+                            behavior: 'smooth'
+                        });
+                    });
+                });
+            }
+        });
+
+
+
+
+        // --- SCRIPT DO MODAL DE VÍDEO (LIGHTBOX) ---
+        const videoCards = document.querySelectorAll('.video-card');
+        const modalOverlay = document.getElementById('videoModalOverlay');
+        const modalVideo = document.getElementById('modalVideoPlayer');
+        const closeBtn = document.getElementById('closeVideoModal');
+
+        // Função para fechar e limpar o modal
+        function closeVideoModal() {
+            modalOverlay.classList.remove('active');
+            modalVideo.pause();
+            modalVideo.src = ""; // Limpa a memória
+            setTimeout(() => {
+                modalOverlay.style.display = 'none';
+            }, 300); // Aguarda o CSS terminar a transição
+        }
+
+        // Abrir o modal ao clicar em qualquer card
+        videoCards.forEach(card => {
+            card.addEventListener('click', function() {
+                // Pega o caminho do vídeo do card clicado
+                const videoSrc = this.querySelector('video').getAttribute('src');
+                
+                // Joga o vídeo no Modal e exibe na tela
+                modalVideo.setAttribute('src', videoSrc);
+                modalOverlay.style.display = 'flex'; // Display flex centraliza na tela
+                
+                // Pequeno atraso para o CSS fazer a animação de opacidade/zoom
+                setTimeout(() => {
+                    modalOverlay.classList.add('active');
+                    modalVideo.play();
+                }, 10);
+            });
+        });
+
+        // Eventos para fechar o modal
+        if(closeBtn) closeBtn.addEventListener('click', closeVideoModal);
+        
+        // Fecha se o usuário clicar no fundo escuro fora do vídeo
+        if(modalOverlay) {
+            modalOverlay.addEventListener('click', function(e) {
+                if (e.target === modalOverlay) {
+                    closeVideoModal();
+                }
+            });
+        }
+
+
+
+
+
+
+        // --- SCRIPT DO CARROSSEL DE RELATÓRIOS ---
+        const reportCarousel = document.getElementById('reportCarousel');
+        const btnPrevReport = document.getElementById('btn-prev-report');
+        const btnNextReport = document.getElementById('btn-next-report');
+
+        if(reportCarousel && btnPrevReport && btnNextReport) {
+            btnNextReport.addEventListener('click', () => {
+                const slideWidth = reportCarousel.querySelector('.report-slide').offsetWidth;
+                reportCarousel.scrollBy({ left: slideWidth, behavior: 'smooth' });
+            });
+
+            btnPrevReport.addEventListener('click', () => {
+                const slideWidth = reportCarousel.querySelector('.report-slide').offsetWidth;
+                reportCarousel.scrollBy({ left: -slideWidth, behavior: 'smooth' });
+            });
+        }
+
+
+        // --- SCRIPT DO CARROSSEL DE RELATÓRIOS 3D (EFEITO PROFUNDIDADE) ---
+        const showcaseTrack = document.getElementById('report-showcase-track');
+        const showcaseSlides = document.querySelectorAll('.report-showcase-slide');
+        const btnShowcasePrev = document.getElementById('btn-showcase-prev');
+        const btnShowcaseNext = document.getElementById('btn-showcase-next');
+
+        if (showcaseTrack && showcaseSlides.length > 0) {
+            // Um "olheiro" (Observer) para detectar qual slide está no centro da tela
+            const observerOptions = {
+                root: showcaseTrack,
+                threshold: 0.6 // Dispara quando 60% da imagem passar pelo centro
+            };
+            
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        // Limpa o zoom das imagens laterais
+                        showcaseSlides.forEach(s => s.classList.remove('active-slide'));
+                        // Dá o zoom na imagem que parou no meio
+                        entry.target.classList.add('active-slide');
+                    }
+                });
+            }, observerOptions);
+
+            showcaseSlides.forEach(slide => observer.observe(slide));
+
+            // Setinhas de navegação
+            btnShowcaseNext.addEventListener('click', () => {
+                const slideWidth = showcaseSlides[0].offsetWidth + 40; // largura do card + gap
+                showcaseTrack.scrollBy({ left: slideWidth, behavior: 'smooth' });
+            });
+
+            btnShowcasePrev.addEventListener('click', () => {
+                const slideWidth = showcaseSlides[0].offsetWidth + 40;
+                showcaseTrack.scrollBy({ left: -slideWidth, behavior: 'smooth' });
+            });
+        }
+
+        
+</script>
+
+
+</body>
+</html>
