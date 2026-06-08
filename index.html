@@ -28,6 +28,10 @@
             box-sizing: border-box;
         }
 
+        html {
+            scroll-behavior: smooth;
+        }
+
         body {
             font-family: 'Inter', sans-serif; /* Fonte de corpo super legível */
             color: var(--text-dark);
@@ -40,17 +44,7 @@
             font-family: 'Outfit', sans-serif; /* Fonte tech e moderna para títulos */
         }
 
-
-
-
-
-
-
-
-
-
-
-        /* --- HEADER --- */
+/* --- HEADER --- */
         header {
             background-color: var(--dark-blue);
             color: #ffffff;
@@ -189,19 +183,11 @@
             margin-right: auto;
         }
 
-
-
-
-
-
-
-
-
-        /* --- HERO CSS --- */
+/* --- HERO CSS --- */
     
         .hero-section {
             /* Define o arquivo de imagem que será usado como fundo */
-            background-image: url('fundo1.PNG'); 
+            background-image: url('fundo1.webp');
             
             /* Força a imagem a preencher toda a largura e altura da seção sem achatar ou distorcer */
             background-size: cover; 
@@ -394,11 +380,7 @@
             }
         }
 
-
-
-
-
-        /* --- COMO FUNCIONA (Telas do Sistema) --- */
+/* --- COMO FUNCIONA (Telas do Sistema) --- */
         .how-it-works-section {
             padding: 10px 5%;
             background-color: #ffffff; /* Fundo branco para contrastar com a seção cinza claro de cima */
@@ -498,30 +480,7 @@
             }
         }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-        
-        
-
-
-
-        /* --- NOVA SEÇÃO: GRADE DE RELATÓRIOS E EQUIPAMENTOS --- */
+/* --- NOVA SEÇÃO: GRADE DE RELATÓRIOS E EQUIPAMENTOS --- */
         .services-grid-section {
             padding: 80px 5% 120px 5%; /* AUMENTADO PARA 120px PARA DESGRUDAR O CARD */
             background-color: var(--bg-light); 
@@ -583,9 +542,7 @@
             z-index: 2;
         }
 
-        
-
-        .service-card {
+.service-card {
             display: flex;
             background-color: #ffffff;
             border-radius: 12px;
@@ -645,10 +602,7 @@
             margin: 0;
         }
 
-        
-
-
-        /* --- LISTA DE 3 COLUNAS --- */
+/* --- LISTA DE 3 COLUNAS --- */
         .deliverables-container {
             max-width: 1200px;
             margin: 60px auto 0 auto;
@@ -695,22 +649,6 @@
             margin-top: 2px;
             font-size: 14px;
         }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 /* --- CARD DE LOGOS DAS NORMAS SOBREPOSTO --- */
         /* --- CARD DE LOGOS DAS NORMAS SOBREPOSTO --- */
@@ -806,22 +744,7 @@
             background-color: white;
         }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-        /* Responsividade */
+/* Responsividade */
         @media (max-width: 992px) {
             .services-grid { grid-template-columns: 1fr; }
             .deliverables-container { grid-template-columns: 1fr; }
@@ -839,47 +762,31 @@
             .services-grid-section { padding-bottom: 160px; } /* Dá espaço pro card não quebrar no celular */
         }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-        /* --- SEÇÃO CARROSSEL DE RELATÓRIOS (EFEITO 3D) --- */
+/* --- SEÇÃO CARROSSEL DE RELATÓRIOS (EFEITO 3D) CORRIGIDO --- */
         .report-showcase-section {
             padding: 60px 0 20px 0;
             background-color: #ffffff;
             text-align: center;
             overflow: hidden;
+            width: 100vw; /* Garante que a seção use a largura real da tela para achar o meio exato */
+            margin-left: calc(-50vw + 50%); /* Hack para ignorar limites laterais e cravar o centro */
         }
 
         .report-showcase-container {
             position: relative;
-            max-width: 1200px;
-            margin: 0 auto;
+            width: 100%;
         }
 
         .report-showcase-track {
             display: flex;
             align-items: center;
             overflow-x: auto;
-            scroll-snap-type: x mandatory;
+            scroll-snap-type: x mandatory; /* O "Ímã" que trava no centro */
             scroll-behavior: smooth;
-            padding: 50px calc(50% - 180px); /* Hack mágico para garantir que o item de 360px fique no centro */
+            padding: 50px calc(50vw - 180px); /* Usa 50vw (metade da tela visual) para centralizar perfeito */
             gap: 40px;
             -ms-overflow-style: none;
             scrollbar-width: none;
-            
-            /* O SEGREDINHO DA MÁGICA: Efeito de sumir silenciosamente nas bordas */
             -webkit-mask-image: linear-gradient(to right, transparent 0%, black 20%, black 80%, transparent 100%);
             mask-image: linear-gradient(to right, transparent 0%, black 20%, black 80%, transparent 100%);
         }
@@ -889,13 +796,14 @@
         }
 
         .report-showcase-slide {
-            flex: 0 0 360px; /* Largura exata da folha do relatório */
+            flex: 0 0 360px; /* Largura cravada */
             scroll-snap-align: center;
-            transition: all 0.5s cubic-bezier(0.25, 0.8, 0.25, 1); /* Animação super fluida tipo Apple */
-            opacity: 0.4; /* Fica mais transparente quando está nas laterais */
-            transform: scale(0.8); /* Fica menor nas laterais para dar PROFUNDIDADE */
+            transition: all 0.5s cubic-bezier(0.25, 0.8, 0.25, 1); 
+            opacity: 0.4; 
+            transform: scale(0.8); 
             border-radius: 4px;
             box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            box-sizing: border-box; /* Protege a largura de 360px contra quebras de borda */
         }
 
         .report-showcase-slide img {
@@ -906,10 +814,10 @@
             border: 1px solid #e2e8f0;
         }
 
-        /* Classe que o JavaScript vai injetar na folha que estiver no CENTRO */
+        /* A folha em FOCO no centro */
         .report-showcase-slide.active-slide {
             opacity: 1;
-            transform: scale(1.1); /* Dá o zoom na folha do meio (Foco) */
+            transform: scale(1.1); 
             z-index: 2;
             box-shadow: 0 25px 50px rgba(0,26,49,0.2);
             border-color: var(--primary-blue);
@@ -946,7 +854,7 @@
 
         @media (max-width: 768px) {
             .report-showcase-track {
-                padding: 40px calc(50% - 120px); 
+                padding: 40px calc(50vw - 120px); 
                 gap: 20px;
             }
             .report-showcase-slide { flex: 0 0 240px; }
@@ -955,19 +863,9 @@
             .showcase-btn.next { right: 2%; }
         }
 
+/* --- PROVA SOCIAL COMPLETO --- */
 
-
-
-
-
-
-
-
-
-        /* --- PROVA SOCIAL COMPLETO --- */
-       
-
-        .carousel-wrapper {
+.carousel-wrapper {
             background-color: #ffffff;
             padding: 20px 5% 40px 5%; 
             width: 100%;
@@ -1122,13 +1020,7 @@
             }
         }
 
-
-
-
-
-
-
-        /* --- CARROSSEL DE VÍDEOS MOBILE --- */
+/* --- CARROSSEL DE VÍDEOS MOBILE --- */
         /* --- CARROSSEL DE VÍDEOS MOBILE --- */
         .video-carousel-section {
             margin-top: 10px;
@@ -1353,28 +1245,20 @@
             }
         }
 
-
-
-
-        
-
-        /* --- PREÇOS --- */
+/* --- PREÇOS --- */
 
         section-title-pricing{
             color: white !important;
 
         }
 
-
-
-        .pricing-section {
+.pricing-section {
             padding: 100px 5%;
             background-color: #000000;
             text-align: center;
         }
-        
 
-        .pricing-card-modern {
+.pricing-card-modern {
             background: #ffffff;
             border: 2px solid var(--dark-blue);
             border-radius: 24px;
@@ -1580,15 +1464,13 @@
             </div>
         </div>
 
-        
-
-        <div class="header-contacts">
+<div class="header-contacts">
             <div><i class="fa-brands fa-whatsapp"></i> (27) ver telefone</div>
             <div><i class="fa-regular fa-envelope"></i> contato@normaseng.com.br</div>
         </div>
 
         <div class="header-right">
-            <a href="#" class="client-area-btn">Área de Login <i class="fa-regular fa-user"></i></a>
+            <a href="https://nr13.nr1sistema.com.br/index.php" class="client-area-btn">Área de Login <i class="fa-regular fa-user"></i></a>
             <div class="menu-btn">
                 <span></span>
                 <span></span>
@@ -1597,12 +1479,7 @@
         </div>
     </header>
 
-
-
-
-
-
-    <section class="hero-section">
+<section class="hero-section">
         <div class="hero-content">
             <h1 class="hero-title">Gere Relatorios de inspeção NR-13 Completos em Segundos e Escale sua produtividade e lucro</h1>
             <p class="hero-text">Esqueça o Word e planilhas manuais. Centralize clientes, organize inspeções em campo com sua equipe e entregue laudos com memoriais de cálculo injetados automaticamente em 1 clique.</p>
@@ -1630,10 +1507,8 @@
                 <p>Sistema desenvolvido em conformidade com as normas <strong>ASME VIII Div. 1</strong> e <strong>NR-13</strong>.</p>
             </div>
         </div>
-    
 
-
-        <section class="how-it-works-section" id="como-funciona">
+<section class="how-it-works-section" id="como-funciona">
         <h2 class="section-title">COMO O SISTEMA FUNCIONA</h2>
         <p class="section-subtitle">Do cadastro do equipamento à geração do laudo técnico, tudo automatizado em um fluxo de trabalho inteligente.</p>
 
@@ -1649,7 +1524,7 @@
                     </ul>
                 </div>
                 <div class="feature-image">
-                    <img src="sistema1.PNG" alt="Tela de Gestão de Equipamentos NR-13">
+                    <img loading="lazy" decoding="async" src="sistema1.webp" alt="Tela de Gestão de Equipamentos NR-13">
                 </div>
             </div>
 
@@ -1663,7 +1538,7 @@
                     </ul>
                 </div>
                 <div class="feature-image">
-                    <img src="sistema2.PNG" alt="Tela do Sistema Mobile para Inspeção">
+                    <img loading="lazy" decoding="async" src="sistema2.webp" alt="Tela do Sistema Mobile para Inspeção">
                 </div>
             </div>
 
@@ -1678,46 +1553,29 @@
                     </ul>
                 </div>
                 <div class="feature-image">
-                    <img src="sistema3.PNG" alt="Tela de Geração de Laudos e Memoriais NR-13">
+                    <img loading="lazy" decoding="async" src="sistema3.webp" alt="Tela de Geração de Laudos e Memoriais NR-13">
                 </div>
             </div>
 
         </div>
     </section>
 
-
-
-
-
-    
-
-
-
-
-
-
-
-
-
-
-
-
-    <!-- NOVA SEÇÃO: GRADE DE SERVIÇOS E ENTREGÁVEIS -->
+<!-- NOVA SEÇÃO: GRADE DE SERVIÇOS E ENTREGÁVEIS -->
     <section class="services-grid-section" id="equipamentos">
         
         <!-- Marca d'água encapsulada para não dar scroll lateral -->
         <div class="watermark-wrapper">
-            <img src="asme.webp" alt="Marca D'água" class="watermark-logo">
+            <img loading="lazy" decoding="async" src="asme.webp" alt="Marca D'água" class="watermark-logo">
         </div>
 
         <h2 class="services-section-title">Automatize sua Engenharia</h2>
-        <p class="services-section-subtitle">Gere relatórios para vasos, caldeiras, autoclaves, tubulações, tanques, manutenção de válvula, certificados de calibração etc...</p>
+        <p class="services-section-subtitle">De vasos de pressão a válvulas de segurança: gere laudos técnicos completos para qualquer equipamento sob a NR-13, com memorial de cálculo ASME VIII injetado automaticamente em 1 clique. Menos retrabalho, mais contratos fechados.</p>
 
         <!-- Grade com 4 Cards -->
         <div class="services-grid">
             <div class="service-card">
                 <div class="service-img">
-                    <img src="vasopressao.jpg" alt="Vasos de Pressão">
+                    <img loading="lazy" decoding="async" src="vasopressao.webp" alt="Vasos de Pressão">
                 </div>
                 <div class="service-content">
                     <h4>NR-13 - Vasos de Pressão</h4>
@@ -1727,7 +1585,7 @@
 
             <div class="service-card">
                 <div class="service-img">
-                    <img src="caldeira.jpg" alt="Caldeiras">
+                    <img loading="lazy" decoding="async" src="caldeira.webp" alt="Caldeiras">
                 </div>
                 <div class="service-content">
                     <h4>NR-13 - Caldeiras</h4>
@@ -1737,7 +1595,7 @@
 
             <div class="service-card">
                 <div class="service-img">
-                    <img src="autoclave.png" alt="Autoclaves">
+                    <img loading="lazy" decoding="async" src="autoclave.webp" alt="Autoclaves">
                 </div>
                 <div class="service-content">
                     <h4>NR-13 - Autoclaves</h4>
@@ -1747,7 +1605,7 @@
 
             <div class="service-card">
                 <div class="service-img">
-                    <img src="tubulacoes.PNG" alt="Tubulações e Tanques">
+                    <img loading="lazy" decoding="async" src="tubulacoes.PNG" alt="Tubulações e Tanques">
                 </div>
                 <div class="service-content">
                     <h4>Tubulações e Tanques</h4>
@@ -1755,20 +1613,19 @@
                 </div>
             </div>
 
-
-            <div class="service-card">
+<div class="service-card">
                 <div class="service-img">
-                    <img src="compressor.PNG" alt="Compressores">
+                    <img loading="lazy" decoding="async" src="compressor.webp" alt="Compressores">
                 </div>
                 <div class="service-content">
                     <h4>NR-13 - Compressores</h4>
-                    <p>Adequação completa e prontuários para compressores,  </p>
+                    <p>Adequação completa e prontuários para compressores de ar e gás, com cálculo dos vasos acoplados e controle total das datas de manutenção e calibração.</p>
                 </div>
             </div>
 
             <div class="service-card">
                 <div class="service-img">
-                    <img src="valvula.PNG" alt="Válvulas PSV">
+                    <img loading="lazy" decoding="async" src="valvula.webp" alt="Válvulas PSV">
                 </div>
                 <div class="service-content">
                     <h4>Válvulas de Segurança (PSV)</h4>
@@ -1776,8 +1633,7 @@
                 </div>
             </div>
 
-
-        </div>
+</div>
 
         <!-- 3 Colunas de Entregáveis -->
         <div class="deliverables-container">
@@ -1843,17 +1699,17 @@
                 
                 <div class="logos-track-container">
                     <div class="logos-track">
-                        <img src="imetro.png" alt="Inmetro">
-                        <img src="asme.webp" alt="ASME">
-                        <img src="abendi.jpg" alt="ABENDI">
-                        <img src="cmse.jpg" alt="CMSE Segurança">
-                        <img src="abnt.jpg" alt="ABNT">
+                        <img loading="lazy" decoding="async" src="imetro.webp" alt="Inmetro">
+                        <img loading="lazy" decoding="async" src="asme.webp" alt="ASME">
+                        <img loading="lazy" decoding="async" src="abendi.webp" alt="ABENDI">
+                        <img loading="lazy" decoding="async" src="cmse.webp" alt="CMSE Segurança">
+                        <img loading="lazy" decoding="async" src="abnt.webp" alt="ABNT">
                         
-                        <img src="imetro.png" alt="Inmetro">
-                        <img src="asme.webp" alt="ASME">
-                        <img src="abendi.jpg" alt="ABENDI">
-                        <img src="cmse.jpg" alt="CMSE Segurança">
-                        <img src="abnt.jpg" alt="ABNT">
+                        <img loading="lazy" decoding="async" src="imetro.webp" alt="Inmetro">
+                        <img loading="lazy" decoding="async" src="asme.webp" alt="ASME">
+                        <img loading="lazy" decoding="async" src="abendi.webp" alt="ABENDI">
+                        <img loading="lazy" decoding="async" src="cmse.webp" alt="CMSE Segurança">
+                        <img loading="lazy" decoding="async" src="abnt.webp" alt="ABNT">
                     </div>
                 </div>
 
@@ -1862,16 +1718,7 @@
 
     </section>
 
-
-
-
-
-
-
-
-
-
-    <section class="report-showcase-section">
+<section class="report-showcase-section">
         <div class="report-showcase-container">
             
             <button class="showcase-btn prev" id="btn-showcase-prev"><i class="fa-solid fa-chevron-left"></i></button>
@@ -1879,29 +1726,17 @@
 
             <div class="report-showcase-track" id="report-showcase-track">
                 
-                <div class="report-showcase-slide active-slide"><img src="rel1.PNG" alt="Folha 1"></div>
-                <div class="report-showcase-slide"><img src="rel2.PNG" alt="Folha 2"></div>
-                <div class="report-showcase-slide"><img src="rel3.PNG" alt="Folha 3"></div>
-                <div class="report-showcase-slide"><img src="rel4.jpg" alt="Folha 4"></div>
-                <div class="report-showcase-slide"><img src="rel5.jpg" alt="Folha 5"></div>
+                <div class="report-showcase-slide active-slide"><img loading="lazy" decoding="async" src="rel1.webp" alt="Folha 1"></div>
+                <div class="report-showcase-slide"><img loading="lazy" decoding="async" src="rel2.webp" alt="Folha 2"></div>
+                <div class="report-showcase-slide"><img loading="lazy" decoding="async" src="rel3.webp" alt="Folha 3"></div>
+                <div class="report-showcase-slide"><img loading="lazy" decoding="async" src="rel4.jpg" alt="Folha 4"></div>
+                <div class="report-showcase-slide"><img loading="lazy" decoding="async" src="rel5.jpg" alt="Folha 5"></div>
                 
                 </div>
         </div>
     </section>
 
-
-
-
-
-
-
-
-
-
-
-
-
-    <!-- PROVA SOCIAL RECONSTRUÍDA -->
+<!-- PROVA SOCIAL RECONSTRUÍDA -->
     <section class="social-proof-section" id="prova-social">
         <h2 class="section-title">QUEM USA APROVA!</h2>
         <p class="section-subtitle" style="margin-bottom: 20px;">Veja o que engenheiros que usam o sistema dizem...</p>
@@ -1911,7 +1746,7 @@
                 
                 <div class="sp-card">
                     <div class="sp-user-info">
-                        <img src="https://i.pravatar.cc/150?img=11" alt="Foto Engenheiro" class="sp-avatar">
+                        <img loading="lazy" decoding="async" src="https://i.pravatar.cc/150?img=11" alt="Foto Engenheiro" class="sp-avatar">
                         <div class="sp-name-role">
                             <h3 class="sp-name">Carlos Eduardo</h3>
                             <span class="sp-role">Engenheiro Mecânico Sênior <br> CREA: 125487/SP</span>
@@ -1922,7 +1757,7 @@
 
                 <div class="sp-card">
                     <div class="sp-user-info">
-                        <img src="https://i.pravatar.cc/150?img=5" alt="Foto Engenheira" class="sp-avatar">
+                        <img loading="lazy" decoding="async" src="https://i.pravatar.cc/150?img=5" alt="Foto Engenheira" class="sp-avatar">
                         <div class="sp-name-role">
                             <h3 class="sp-name">Mariana Silva</h3>
                             <span class="sp-role">Projetista</span>
@@ -1933,7 +1768,7 @@
 
                 <div class="sp-card">
                     <div class="sp-user-info">
-                        <img src="https://i.pravatar.cc/150?img=33" alt="Foto Inspetor" class="sp-avatar">
+                        <img loading="lazy" decoding="async" src="https://i.pravatar.cc/150?img=33" alt="Foto Inspetor" class="sp-avatar">
                         <div class="sp-name-role">
                             <h3 class="sp-name">Ricardo Mendes</h3>
                             <span class="sp-role">Inspetor de Equipamentos</span>
@@ -1944,7 +1779,7 @@
 
                 <div class="sp-card">
                     <div class="sp-user-info">
-                        <img src="https://i.pravatar.cc/150?img=12" alt="Foto Engenheiro" class="sp-avatar">
+                        <img loading="lazy" decoding="async" src="https://i.pravatar.cc/150?img=12" alt="Foto Engenheiro" class="sp-avatar">
                         <div class="sp-name-role">
                             <h3 class="sp-name">Roberto Alves</h3>
                             <span class="sp-role">Engenheiro Mecânico <br> CREA: 854123/MG</span>
@@ -1955,7 +1790,7 @@
 
                 <div class="sp-card">
                     <div class="sp-user-info">
-                        <img src="https://i.pravatar.cc/150?img=47" alt="Foto Engenheira" class="sp-avatar">
+                        <img loading="lazy" decoding="async" src="https://i.pravatar.cc/150?img=47" alt="Foto Engenheira" class="sp-avatar">
                         <div class="sp-name-role">
                             <h3 class="sp-name">Fernanda Costa</h3>
                             <span class="sp-role">Engenheira Mecânica <br> CREA: 541298/RJ</span>
@@ -1975,21 +1810,14 @@
                 <span class="dot" data-index="4"></span>
             </div>
 
+<div class="video-carousel-section">
 
-
-            
-            
-
-
-                <div class="video-carousel-section">
-                
-                
-                <div class="video-carousel-container">
+<div class="video-carousel-container">
                     
                     <div class="video-item-wrapper">
                         <div class="video-card">
                             <div class="video-header">
-                                <img src="https://i.pravatar.cc/150?img=11" alt="Carlos">
+                                <img loading="lazy" decoding="async" src="https://i.pravatar.cc/150?img=11" alt="Carlos">
                                 <div class="vh-text">
                                     <span class="vh-name">Carlos Eduardo</span>
                                     <span class="vh-role">Eng. Mecânico Sênior</span>
@@ -2001,9 +1829,7 @@
                         <p class="video-testimonial">"Sensacional! poupa horas de digitação e a documentação sai esteticamente bonita"</p>
                     </div>
 
-                    
-                    
-                </div>
+</div>
             </div>
 
             <div class="video-modal-overlay" id="videoModalOverlay">
@@ -2013,29 +1839,19 @@
                 </div>
             </div>
 
-        
-                    
-
-
-
-
-
-        </div>
+</div>
 
     </section>
 
-
-
-
-
-
-
-
-    <!-- PREÇOS RECONSTRUÍDO -->
+<!-- PREÇOS RECONSTRUÍDO -->
     <section class="pricing-section" id="planos">
         <h2 style="font-weight: bold; color: #ffffff; font-size: 1.5em;">Padronize, Evite multas. Automatize, evite custos</h2>
         <p class="section-subtitle" style="margin-bottom: 20px;">
             A concorrência está automatizando processos e pegando os melhores contratos. Assine agora e passe a entregar laudos premium em uma fração do tempo.
+        </p>
+
+        <p style="color: var(--cta-color); font-family: 'Outfit', sans-serif; font-weight: 800; font-size: 14px; text-transform: uppercase; letter-spacing: 1px; text-align: center; margin-bottom: -10px;">
+            <i class="fa-solid fa-triangle-exclamation"></i> Vagas limitadas nesta turma — condição promocional por tempo limitado
         </p>
 
         <div class="pricing-card-modern">
@@ -2058,7 +1874,7 @@
                 <li><i class="fa-solid fa-circle-check"></i> Suporte Técnico de Engenharia</li>
             </ul>
 
-            <a href="#comprar" class="btn-pricing">Garantir Meu Acesso Agora</a>
+            <a href="https://pay.kiwify.com.br/27J91RK" class="btn-pricing">Garantir Meu Acesso Agora</a>
         </div>
     </section>
 
@@ -2102,19 +1918,7 @@
         </div>
     </footer>
 
-
-
-
-
-
-
-
-
-
-
-
-
-    <script>
+<script>
         document.addEventListener('DOMContentLoaded', function() {
             const carousel = document.getElementById('sp-carousel');
             const dots = document.querySelectorAll('.dot');
@@ -2147,10 +1951,7 @@
             }
         });
 
-
-
-
-        // --- SCRIPT DO MODAL DE VÍDEO (LIGHTBOX) ---
+// --- SCRIPT DO MODAL DE VÍDEO (LIGHTBOX) ---
         const videoCards = document.querySelectorAll('.video-card');
         const modalOverlay = document.getElementById('videoModalOverlay');
         const modalVideo = document.getElementById('modalVideoPlayer');
@@ -2196,12 +1997,7 @@
             });
         }
 
-
-
-
-
-
-        // --- SCRIPT DO CARROSSEL DE RELATÓRIOS ---
+// --- SCRIPT DO CARROSSEL DE RELATÓRIOS ---
         const reportCarousel = document.getElementById('reportCarousel');
         const btnPrevReport = document.getElementById('btn-prev-report');
         const btnNextReport = document.getElementById('btn-next-report');
@@ -2218,26 +2014,25 @@
             });
         }
 
-
-        // --- SCRIPT DO CARROSSEL DE RELATÓRIOS 3D (EFEITO PROFUNDIDADE) ---
+// --- SCRIPT DO CARROSSEL DE RELATÓRIOS 3D (EFEITO PROFUNDIDADE) CORRIGIDO ---
         const showcaseTrack = document.getElementById('report-showcase-track');
         const showcaseSlides = document.querySelectorAll('.report-showcase-slide');
         const btnShowcasePrev = document.getElementById('btn-showcase-prev');
         const btnShowcaseNext = document.getElementById('btn-showcase-next');
 
         if (showcaseTrack && showcaseSlides.length > 0) {
-            // Um "olheiro" (Observer) para detectar qual slide está no centro da tela
+            // O OLHEIRO: Agora configurado para olhar apenas uma "fresta" exata no meio da tela
+            // Isso impede que ele ative fotos antes da hora.
             const observerOptions = {
                 root: showcaseTrack,
-                threshold: 0.6 // Dispara quando 60% da imagem passar pelo centro
+                rootMargin: '0px -45% 0px -45%', 
+                threshold: 0
             };
             
             const observer = new IntersectionObserver((entries) => {
                 entries.forEach(entry => {
                     if (entry.isIntersecting) {
-                        // Limpa o zoom das imagens laterais
                         showcaseSlides.forEach(s => s.classList.remove('active-slide'));
-                        // Dá o zoom na imagem que parou no meio
                         entry.target.classList.add('active-slide');
                     }
                 });
@@ -2245,21 +2040,19 @@
 
             showcaseSlides.forEach(slide => observer.observe(slide));
 
-            // Setinhas de navegação
+            // NAVEGAÇÃO MAGNÉTICA: Em vez de somar metades, damos só um pequeno "empurrão" de 200px.
+            // O CSS "scroll-snap" magnético assume o controle e trava perfeitamente o card mais próximo no centro.
+            // Acaba de vez com o pulo do 1º pro 3º.
             btnShowcaseNext.addEventListener('click', () => {
-                const slideWidth = showcaseSlides[0].offsetWidth + 40; // largura do card + gap
-                showcaseTrack.scrollBy({ left: slideWidth, behavior: 'smooth' });
+                showcaseTrack.scrollBy({ left: 200, behavior: 'smooth' });
             });
 
             btnShowcasePrev.addEventListener('click', () => {
-                const slideWidth = showcaseSlides[0].offsetWidth + 40;
-                showcaseTrack.scrollBy({ left: -slideWidth, behavior: 'smooth' });
+                showcaseTrack.scrollBy({ left: -200, behavior: 'smooth' });
             });
         }
 
-        
 </script>
-
 
 </body>
 </html>
