@@ -7,29 +7,6 @@
     <!-- Fontes Premium SaaS: Outfit para Títulos e Inter para Textos -->
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Outfit:wght@400;600;800;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <meta name="facebook-domain-verification" content="57tt6m5avl9qwafkmjt0urdwqqcoyo" />
-
-    <!-- Meta Pixel Code -->
-<script>
-!function(f,b,e,v,n,t,s)
-{if(f.fbq)return;n=f.fbq=function(){n.callMethod?
-n.callMethod.apply(n,arguments):n.queue.push(arguments)};
-if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
-n.queue=[];t=b.createElement(e);t.async=!0;
-t.src=v;s=b.getElementsByTagName(e)[0];
-s.parentNode.insertBefore(t,s)}(window, document,'script',
-'https://connect.facebook.net/en_US/fbevents.js');
-fbq('init', '1624371105202459');
-fbq('track', 'PageView');
-</script>
-<noscript>
-<img height="1" width="1" style="display:none"
-src="https://www.facebook.com/tr?id=1624371105202459&ev=PageView&noscript=1"/>
-</noscript>
-<!-- End Meta Pixel Code -->
-
-
-    
     <style>
         :root {
             --primary-blue: #0066a1;
@@ -253,6 +230,7 @@ src="https://www.facebook.com/tr?id=1624371105202459&ev=PageView&noscript=1"/>
             z-index: 2; /* Mantém o texto acima do degradê */
             max-width: 650px; /* Limita a largura para ficar só na esquerda */
             text-align: left; /* Alinha os textos à esquerda */
+            margin-bottom: 0px;
         }
 
         .hero-title {
@@ -262,6 +240,7 @@ src="https://www.facebook.com/tr?id=1624371105202459&ev=PageView&noscript=1"/>
             line-height: 1.1;
             margin-bottom: 25px;
             letter-spacing: -1px;
+            padding-top: 100px;
         }
 
         .hero-text {
@@ -270,6 +249,7 @@ src="https://www.facebook.com/tr?id=1624371105202459&ev=PageView&noscript=1"/>
             color: #cbd5e1;
             margin-bottom: 40px;
             line-height: 1.6;
+            
         }
 
         .btn-hero {
@@ -387,8 +367,8 @@ src="https://www.facebook.com/tr?id=1624371105202459&ev=PageView&noscript=1"/>
         /* Responsividade Extra */
         @media (max-width: 992px) {
             .hero-section::before {
-                /* Escurece a tela toda no celular para garantir leitura */
-                background: linear-gradient(to right, rgba(0, 26, 49, 0.9) 0%, rgba(0, 26, 49, 0.8) 100%);
+                /* Clareia a lateral direita para o engenheiro aparecer no fundo */
+                background: linear-gradient(to right, rgba(0, 26, 49, 0.95) 0%, rgba(0, 26, 49, 0.6) 60%, rgba(0, 26, 49, 0.1) 100%);
             }
             .system-compliance-section {
                 flex-direction: column;
@@ -396,7 +376,7 @@ src="https://www.facebook.com/tr?id=1624371105202459&ev=PageView&noscript=1"/>
                 padding: 30px 20px;
             }
             .compliance-checklist ul {
-                grid-template-columns: 1fr; /* Volta para 1 coluna no celular */
+                grid-template-columns: 1fr;
                 text-align: left;
                 display: inline-grid;
                 margin-bottom: 30px;
@@ -877,13 +857,84 @@ src="https://www.facebook.com/tr?id=1624371105202459&ev=PageView&noscript=1"/>
 
         @media (max-width: 768px) {
             .report-showcase-track {
-                padding: 40px calc(50vw - 120px); 
+                /* A matemática muda para centralizar o novo tamanho (metade de 300 é 150) */
+                padding: 40px calc(50vw - 150px); 
                 gap: 20px;
             }
-            .report-showcase-slide { flex: 0 0 240px; }
+            /* Aumentado de 240px para 300px (o scale ativo de 1.1 vai deixar ele gigante e legível) */
+            .report-showcase-slide { flex: 0 0 300px; } 
+            
             .showcase-btn { width: 40px; height: 40px; font-size: 16px; }
-            .showcase-btn.prev { left: 2%; }
-            .showcase-btn.next { right: 2%; }
+            /* Setas empurradas mais para a borda para não sobrepor muito a imagem maior */
+            .showcase-btn.prev { left: 1%; }
+            .showcase-btn.next { right: 1%; }
+        }
+
+        /* --- MODAL (LIGHTBOX) DAS IMAGENS TELA CHEIA --- */
+        .report-showcase-slide img {
+            cursor: pointer;
+        }
+
+        .image-modal-overlay {
+            position: fixed;
+            top: 0; left: 0; width: 100vw; height: 100vh;
+            background-color: rgba(0, 26, 49, 0.95);
+            z-index: 99999;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .image-modal-overlay.active {
+            opacity: 1;
+        }
+
+        .image-modal-content {
+            position: relative;
+            width: 95%;
+            max-width: 800px;
+            max-height: 90vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            transform: scale(0.9);
+            transition: transform 0.3s ease;
+        }
+
+        .image-modal-overlay.active .image-modal-content {
+            transform: scale(1);
+        }
+
+        .image-modal-content img {
+            max-width: 100%;
+            max-height: 90vh;
+            border-radius: 8px;
+            object-fit: contain;
+            box-shadow: 0 25px 50px rgba(0,0,0,0.5);
+        }
+
+        .close-image-modal {
+            position: absolute;
+            top: -15px; right: -15px;
+            background-color: var(--cta-color);
+            color: #000;
+            border: none;
+            width: 40px; height: 40px;
+            border-radius: 50%;
+            font-size: 20px;
+            cursor: pointer;
+            z-index: 100000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+            transition: transform 0.2s ease;
+        }
+
+        .close-image-modal:hover {
+            transform: scale(1.1);
         }
 
 /* --- PROVA SOCIAL COMPLETO --- */
@@ -1034,14 +1085,7 @@ src="https://www.facebook.com/tr?id=1624371105202459&ev=PageView&noscript=1"/>
             }
         }
 
-        @media (max-width: 600px) {
-            .sp-card {
-                flex: 0 0 85%;
-            }
-            .carousel-wrapper {
-                padding: 40px 5%;
-            }
-        }
+        
 
 /* --- CARROSSEL DE VÍDEOS MOBILE --- */
         /* --- CARROSSEL DE VÍDEOS MOBILE --- */
@@ -1545,6 +1589,11 @@ src="https://www.facebook.com/tr?id=1624371105202459&ev=PageView&noscript=1"/>
             margin-right: 5px;
         }
 
+        .price-decimals {
+            font-size: 24px;
+            margin-top: 35px;
+        }
+
         .pricing-features {
             list-style: none;
             margin-bottom: 40px;
@@ -1666,8 +1715,105 @@ src="https://www.facebook.com/tr?id=1624371105202459&ev=PageView&noscript=1"/>
         
         @media (max-width: 768px) {
             .client-area-btn { display: none; }
-            .footer-content { flex-direction: column; }
+            .footer-content { grid-template-columns: 1fr; }
         }
+
+        /* --- AJUSTES DE RESPONSIVIDADE MOBILE (TAMANHOS DE TEXTO E CARDS) --- */
+       
+        /* --- AJUSTES DE RESPONSIVIDADE MOBILE (TAMANHOS DE TEXTO E CARDS) --- */
+        @media (max-width: 600px) {
+            
+            /* HEADER & MENU */
+            header { height: 65px; }
+            .menu-btn { display: none !important; }
+            .header-left { padding-left: 15px; }
+            .logo { font-size: 24px; }
+
+            /* HERO SECTION (Textos descendo para revelar o fundo e botão menor) */
+            .hero-section {
+                padding: 140px 5% 80px; /* Aumentado o teto para 140px para empurrar o texto e revelar o rosto do engenheiro */
+            }
+            .hero-title {
+                font-size: 21px;
+                line-height: 1.2;
+                margin-bottom: 12px;
+                max-width: 85%;
+                letter-spacing: -0.5px;
+            }
+            .hero-text {
+                font-size: 13px;
+                line-height: 1.4;
+                margin-bottom: 20px;
+                max-width: 90%;
+            }
+            .btn-hero {
+                display: block;
+                width: 100%;
+                text-align: center;
+                font-size: 12px; /* Letra do botão levemente menor */
+                padding: 12px 10px; /* Botão mais "fino" na altura */
+                box-sizing: border-box;
+            }
+
+            /* CHECKLIST FLUTUANTE */
+            .system-compliance-section {
+                margin: -20px auto 40px auto;
+                width: 95%;
+                padding: 25px 15px;
+            }
+            .compliance-checklist h3 {
+                font-size: 16px;
+                line-height: 1.3;
+                margin-bottom: 20px;
+                text-align: center;
+            }
+
+            /* CARDS DE SERVIÇOS */
+            .service-card { margin-bottom: 10px; }
+            .service-img { height: 150px; padding: 5px; }
+            .service-img img { max-height: 130px; transform: scale(1.1); }
+            .service-content { padding: 15px 15px 20px 15px; }
+            .service-content h4 { font-size: 16px; margin-bottom: 6px; }
+            .service-content p { font-size: 13px; line-height: 1.4; }
+
+            /* CARROSSEL DE RELATÓRIOS (Descendo para não colar nos logos) */
+            .report-showcase-section {
+                padding-top: 140px; /* Cria um bom distanciamento exato entre o card flutuante de logos e as imagens */
+            }
+
+            /* RESTANTE ORIGINAL MANTIDO */
+            .section-title { font-size: 24px; letter-spacing: -0.5px; }
+            .section-subtitle { font-size: 14px; margin-bottom: 40px; }
+            .compliance-checklist li { font-size: 13px; }
+            .feature-text h3 { font-size: 20px; }
+            .feature-text p { font-size: 14px; }
+            .feature-text ul li { font-size: 14px; }
+            .services-section-title { font-size: 24px; letter-spacing: -0.5px; }
+            .services-section-subtitle { font-size: 14px; margin-bottom: 35px; }
+            .deliverables-container { padding: 20px; gap: 25px; }
+            .deliverables-column h5 { font-size: 16px; margin-bottom: 15px; }
+            .deliverables-list li { font-size: 13px; }
+            .video-carousel-title { font-size: 18px; }
+            .video-testimonial { font-size: 12px; }
+            .pricing-section { padding: 60px 5%; }
+            .pricing-card-modern { padding: 30px 22px; max-width: 100%; }
+            .pricing-header h3 { font-size: 19px; }
+            .price-strike { font-size: 14px; }
+            .price-amount { font-size: 46px; }
+            .price-currency { font-size: 18px; margin-top: 6px; }
+            .price-decimals { font-size: 18px; margin-top: 26px; }
+            .pricing-features li { font-size: 14px; }
+            .btn-pricing { font-size: 15px; }
+            .plan-period { font-size: 13px; }
+            .plan-savings-tag { font-size: 12px; }
+            .footer-col h4 { font-size: 18px; }
+            .footer-col ul li a, .footer-contact { font-size: 14px; }
+        }
+
+
+
+
+
     </style>
 </head>
 <body>
@@ -1948,10 +2094,17 @@ src="https://www.facebook.com/tr?id=1624371105202459&ev=PageView&noscript=1"/>
                 <div class="report-showcase-slide active-slide"><img loading="lazy" decoding="async" src="rel1.webp" alt="Folha 1"></div>
                 <div class="report-showcase-slide"><img loading="lazy" decoding="async" src="rel2.webp" alt="Folha 2"></div>
                 <div class="report-showcase-slide"><img loading="lazy" decoding="async" src="rel3.webp" alt="Folha 3"></div>
-                <div class="report-showcase-slide"><img loading="lazy" decoding="async" src="rel4.jpg" alt="Folha 4"></div>
-                <div class="report-showcase-slide"><img loading="lazy" decoding="async" src="rel5.jpg" alt="Folha 5"></div>
+                <div class="report-showcase-slide"><img loading="lazy" decoding="async" src="rel4.webp" alt="Folha 4"></div>
+                <div class="report-showcase-slide"><img loading="lazy" decoding="async" src="rel5.webp" alt="Folha 5"></div>
                 
                 </div>
+        </div>
+
+                <div class="image-modal-overlay" id="imageModalOverlay">
+            <div class="image-modal-content">
+                <button class="close-image-modal" id="closeImageModal"><i class="fa-solid fa-xmark"></i></button>
+                <img id="modalImagePlayer" src="" alt="Relatório Ampliado">
+            </div>
         </div>
     </section>
 
@@ -1982,7 +2135,7 @@ src="https://www.facebook.com/tr?id=1624371105202459&ev=PageView&noscript=1"/>
                             <span class="sp-role">Projetista</span>
                         </div>
                     </div>
-                    <p class="sp-text">"Acredito que tenha sido o unico sistema que gere calculos e documentacao nesse nivel e sem o uso de planilhas chatas."</p>
+                    <p class="sp-text">"Acredito que a áanter a empresimentos intdeu muita segurança."</p>
                 </div>
 
                 <div class="sp-card">
@@ -2089,7 +2242,7 @@ src="https://www.facebook.com/tr?id=1624371105202459&ev=PageView&noscript=1"/>
         </p>
 
         <p style="color: var(--cta-color); font-family: 'Outfit', sans-serif; font-weight: 800; font-size: 14px; text-transform: uppercase; letter-spacing: 1px; text-align: center; margin-bottom: -10px;">
-            <i class="fa-solid fa-triangle-exclamation"></i> Condição promocional por tempo limitado
+            <i class="fa-solid fa-triangle-exclamation"></i> Vagas limitadas nesta turma — condição promocional por tempo limitado
         </p>
 
         <div class="pricing-plans-grid">
@@ -2098,7 +2251,7 @@ src="https://www.facebook.com/tr?id=1624371105202459&ev=PageView&noscript=1"/>
                 <div class="pricing-header">
                     <h3>Plano Mensal</h3>
                     <div class="price-amount">
-                        <span class="price-currency">R$</span>197<span style="font-size: 24px; margin-top: 35px;">,00</span>
+                        <span class="price-currency">R$</span>197<span class="price-decimals">,00</span>
                     </div>
                     <span class="plan-period">por mês</span>
                 </div>
@@ -2122,7 +2275,7 @@ src="https://www.facebook.com/tr?id=1624371105202459&ev=PageView&noscript=1"/>
                     <h3>Plano Anual</h3>
                     <span class="price-strike">12x de R$ 197,00 = R$ 2.364,00</span>
                     <div class="price-amount">
-                        <span class="price-currency">R$</span>997<span style="font-size: 24px; margin-top: 35px;">,00</span>
+                        <span class="price-currency">R$</span>997<span class="price-decimals">,00</span>
                     </div>
                     <span class="plan-period">por ano</span>
                     <div class="plan-savings-wrap">
@@ -2386,6 +2539,42 @@ src="https://www.facebook.com/tr?id=1624371105202459&ev=PageView&noscript=1"/>
 
             btnShowcasePrev.addEventListener('click', () => {
                 showcaseTrack.scrollBy({ left: -200, behavior: 'smooth' });
+            });
+        }
+
+        // --- SCRIPT DO MODAL DE IMAGEM (TELA CHEIA) ---
+        const reportImages = document.querySelectorAll('.report-showcase-slide img');
+        const imageModalOverlay = document.getElementById('imageModalOverlay');
+        const modalImagePlayer = document.getElementById('modalImagePlayer');
+        const closeImageModalBtn = document.getElementById('closeImageModal');
+
+        function closeImageModal() {
+            imageModalOverlay.classList.remove('active');
+            setTimeout(() => {
+                imageModalOverlay.style.display = 'none';
+                modalImagePlayer.src = "";
+            }, 300);
+        }
+
+        reportImages.forEach(img => {
+            img.addEventListener('click', function() {
+                const imgSrc = this.getAttribute('src');
+                modalImagePlayer.setAttribute('src', imgSrc);
+                imageModalOverlay.style.display = 'flex';
+                
+                setTimeout(() => {
+                    imageModalOverlay.classList.add('active');
+                }, 10);
+            });
+        });
+
+        if(closeImageModalBtn) closeImageModalBtn.addEventListener('click', closeImageModal);
+        
+        if(imageModalOverlay) {
+            imageModalOverlay.addEventListener('click', function(e) {
+                if (e.target === imageModalOverlay) {
+                    closeImageModal();
+                }
             });
         }
 
